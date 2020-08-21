@@ -19,6 +19,8 @@ app.use((req, res, done) => {
   console.log(
     `User at ${req.ip} accessed ${req.originalUrl}`
   )
+
+  done()
 })
 
 app.get('/', (req, res) => {
