@@ -1,0 +1,32 @@
+html,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Inter', sans-serif !important;
+  color: #2F2F41;
+}
+
+h1, h2, h3, h4, h5, .subtitle, .title {
+  font-family: 'Nunito', Helvetica, Arial, sans-serif, -apple-system;
+  font-weight: 900;
+  color: #2F2F41;
+  line-height: 1.25;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.Site-Content {
+  flex: 1;
+}
+
+.button {
+  border-radius: 5px !important;
+  text-transform: uppercase;
+  font-family: 'Nunito', Helvetica, Arial, sans-serif, -apple-system!important;
+}

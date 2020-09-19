@@ -2,17 +2,26 @@
   "name": "goblin",
   "version": "1.0.0",
   "description": "Execute Big's microservice to handle financial data.",
-  "main": "app.js",
+  "main": "./src/index.js",
   "repository": "https://github.com/executebig/goblin",
   "author": "Mingjie Jiang <jiang@mingjie.dev>",
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "airtable-plus": "^1.0.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "handlebars-dateformat": "^1.1.1",
+    "module-alias": "^2.2.2",
     "node-fetch": "^2.6.0"
   },
+  "_moduleAliases": {
+    "@libs": "./src/libs",
+    "@services": "./src/services",
+    "@config": "./config.js"
+  },
   "scripts": {
-    "start": "node app.js"
+    "start": "node ./src/index.js"
   }
 }
