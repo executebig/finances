@@ -6,7 +6,11 @@
     <div class="panel-block" href="#">
         <span>
             {{#if redacted}}
+            {{#eq category "Donation"}}
+            <i>ANONYMOUS DONATION</i>
+                {{else}}
             <i>TRANSACTION RECIPIENT REDACTED</i>
+            {{/eq}}
             {{else}}
             <strong>{{txDisplayName}}</strong>
             {{/if}}
