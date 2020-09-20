@@ -1,3 +1,24 @@
-<div>
-    <a href="/admin" class="button is-large is-link">Login</a>
-</div>
+<article class="panel is-link">
+    <p class="panel-heading">
+        All Transactions
+    </p>
+    {{#each txs}}
+    <div class="panel-block" href="#">
+        <span>
+            {{#if redacted}}
+            <i>TRANSACTION RECIPIENT REDACTED</i>
+            {{else}}
+            <strong>{{txDisplayName}}</strong>
+            {{/if}}
+        </span>
+        <span class="txDate">
+            {{txDate}}
+        </span>
+
+        <div style="position: absolute; right: 15px;">
+            <span class="tag is-dark">{{category}}</span>
+            <span class="tag is-link">{{currency txAmount}}</span>
+        </div>
+    </div>
+    {{/each}}
+</article>

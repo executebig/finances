@@ -37,3 +37,7 @@ exports.formatDate = require('handlebars-dateformat')
 exports.json = (data, options) => {
   return options.fn(JSON.parse(data))
 }
+
+exports.currency = (v) => {
+  return v > 0 ? "$" + v.toFixed(2) : "-$" + Math.abs(v).toFixed(2)
+}

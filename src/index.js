@@ -34,7 +34,15 @@ app.use(passport.session()) // Persistent Sessions
 app.use('/static', express.static(path.join(__dirname, '../static')))
 
 app.get('/', (req, res) => {
-  res.render('landing', { title: 'Goblin' })
+  require('@services/airtable').getTx().then((d) => {
+    res.render('landing', { title: 'Goblin', txs: d })
+  })
+})
+
+app.get('/debug', (req, res) => {
+  require('@services/airtable').getTx().then((d) => {
+    res.json(d)
+  })
 })
 
 app.use("/auth", require("@routes/auth"))

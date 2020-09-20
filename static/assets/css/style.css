@@ -15,6 +15,10 @@ h1, h2, h3, h4, h5, .subtitle, .title {
   line-height: 1.25;
 }
 
+.site-title {
+  color: #266dd3;
+}
+
 body {
   display: flex;
   min-height: 100vh;
@@ -68,4 +72,49 @@ tr {
 
 tr:target {
   background: #fffacd;
+}
+
+.section.main-section {
+  padding-top: 0;
+}
+
+.panel {
+  box-shadow: none;
+  border: 1px solid rgba(47, 47, 65, .2);
+}
+
+.txDate {
+  margin-left: 5px;
+  color: rgba(47, 47, 65, .5);
+}
+
+#copyright {
+  font-weight: 800;
+  color: #fff!important;
+  font-family: 'Nunito', Helvetica, Arial, sans-serif, -apple-system;
+  cursor: default;
+
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Likely future */
+}
+
+.footer {
+  margin-top: 2rem;
+  padding: 2rem 1.5rem 3rem;
+  background-color: #266dd3;
+  color: #fff;
+}
+
+.footer .is-hint {
+  color: lightgray;
+}
+
+.footer a, .footer strong {
+  color: #fff
+}
+
+.footer p.user-info {
+  margin-bottom: 0;
 }

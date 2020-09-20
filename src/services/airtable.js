@@ -6,9 +6,23 @@ const TX_TABLE = "Transactions"
 
 const airtable = new AirtablePlus({
   baseID: config.airtable.base,
-  apiKey:  config.airtable.key,
+  apiKey: config.airtable.key,
   tableName: TX_TABLE,
-  camelCase: true
+  camelCase: true,
+  transform: (r) => {
+    delete r.fields.txRawName
+    delete r.fields.accountId
+    delete r.fields.mercuryLink
+    delete r.fields.txUuid
+
+    r.fields.id = r.id
+
+    if (r.fields.redacted) {
+      r.fields.txDisplayName = "——"
+    }
+
+    return r.fields
+  }
 })
 
 const DATE_SORT = [{
@@ -18,13 +32,13 @@ const DATE_SORT = [{
 
 const getTx = async (rows) => {
   // Pull data (# rows or all) from Airtable
-  const d = await airtable.read(rows ? { maxRecords: rows,  sort: DATE_SORT } : null)
+  const d = await airtable.read(rows ? { maxRecords: rows, sort: DATE_SORT } : { sort: DATE_SORT })
   return d
 }
 
 const createTx = async (txs) => {
   console.log(txs)
-  await airtable.create(txs, {complex: true})
+  await airtable.create(txs, { complex: true })
 }
 
 const findTx = async (tx) => {
@@ -36,7 +50,7 @@ const findTx = async (tx) => {
   if (row[0]) {
     clog.log(`Transaction ${tx.id} exists. No action taken.`)
   } else {
-    clog.log(`Found new transaction ${tx.id}. New entry merged.`,  "success")
+    clog.log(`Found new transaction ${tx.id}. New entry merged.`, "success")
   }
 
   return row[0] ? row[0] : null

@@ -20,19 +20,23 @@
 
 <body>
     <div class="Site-Content">
-        <section class="hero is-medium">
+        <section class="hero">
             <div class="hero-body">
-                <div class="container">
-                    <h1 class="title is-size-1 is-size-3-mobile">{{title}}</h1>
+                <div class="container has-text-centered">
+                    <img src="https://executebig.org/images/icons/donate.svg" width="100">
+                    <h1 class="title site-title is-size-1 is-size-3-mobile">{{title}}</h1>
+                    <p class="subtitle">Home of Execute Big's transparent finance data (a work in progress).</p>
                 </div>
             </div>
         </section>
 
-        <section class="section">
+        <section class="section main-section">
             <div class="container main">
                 {{{body}}}
             </div>
         </section>
+
+        {{>footer}}
     </div>
 
     <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" type="text/javascript" defer></script>
