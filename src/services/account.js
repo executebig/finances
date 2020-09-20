@@ -1,5 +1,6 @@
 const fetch = require('node-fetch')
 const config = require('@config')
+const clog = require('@services/clog')
 
 const db = require('@services/airtable')
 const MERCURY_URL = 'https://backend.mercury.com/api/v1'
@@ -24,6 +25,8 @@ const getAccounts = (id) => {
 
 // Sync specific account
 const syncAccount = (id) => {
+  clog.log("Requesting transaction information from Mercury...")
+
   const createRecords = []
 
   fetch(`${MERCURY_URL}/account/${id}/transactions`, {
@@ -78,8 +81,8 @@ const syncAccount = (id) => {
         })
       }
 
-      console.log(
-        `Synced account ${id}. Updated ${createRecords.length} entries.`
+      clog.log(
+        `Synced account ${id}. Updated ${createRecords.length} entries.`, "success"
       )
     })
 }

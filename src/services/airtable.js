@@ -1,4 +1,5 @@
 const config = require('@config')
+const clog = require('@services/clog')
 
 const AirtablePlus = require('airtable-plus')
 const TX_TABLE = "Transactions"
@@ -32,7 +33,11 @@ const findTx = async (tx) => {
   const uuid = tx.id
   const row = await airtable.read({ filterByFormula: `{Tx UUID} = "${uuid}"`, sort: DATE_SORT, maxRecords: 1 })
 
-  console.log(row[0] ? "Found record " + tx.id : "Not found record " + tx.id)
+  if (row[0]) {
+    clog.log(`Transaction ${tx.id} exists. No action taken.`)
+  } else {
+    clog.log(`Found new transaction ${tx.id}. New entry merged.`,  "success")
+  }
 
   return row[0] ? row[0] : null
 }
