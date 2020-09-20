@@ -25,7 +25,7 @@ const getAccounts = (id) => {
 
 // Sync specific account
 const syncAccount = (id) => {
-  clog.log("Requesting transaction information from Mercury...")
+  clog.log(`Requesting transaction information from Mercury for account ${id}`)
 
   const createRecords = []
 
