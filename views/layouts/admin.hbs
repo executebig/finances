@@ -12,14 +12,14 @@
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@700&family=Nunito:wght@900&display=swap"
         media="print" onload="this.media='all'" />
     <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900" />
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@700&family=Nunito:wght@900&display=swap" />
     <noscript>
         <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900&display=swap" />
-        </noscript>
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@700&family=Nunito:wght@900&display=swap" />
+    </noscript>
 
     {{{block 'head-inject'}}}
 </head>
@@ -44,19 +44,19 @@
                 <div class="column">
                     <h1 class="title is-4">Server Logs</h1>
                     <div class="logs" readonly></textarea>
+                    </div>
+                    {{/if}}
                 </div>
-                {{/if}}
             </div>
         </div>
-    </div>
-        
-    {{>footer}}
 
-    <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" type="text/javascript" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script src="/static/assets/js/clog.js"></script>
-    <script src="/static/assets/js/adminToggles.js"></script>
-    {{{block 'foot-inject'}}}
+        {{>footer}}
+
+        <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" type="text/javascript" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+        <script src="/static/assets/js/clog.js"></script>
+        <script src="/static/assets/js/adminToggles.js"></script>
+        {{{block 'foot-inject'}}}
 </body>
 
 </html>

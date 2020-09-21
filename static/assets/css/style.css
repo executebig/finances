@@ -86,6 +86,8 @@ tr:target {
 .txDate {
   margin-left: 5px;
   color: rgba(47, 47, 65, .5);
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
 }
 
 #copyright {
