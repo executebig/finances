@@ -17,10 +17,6 @@ const airtable = new AirtablePlus({
 
     r.fields.id = r.id
 
-    if (r.fields.redacted) {
-      r.fields.txDisplayName = "——"
-    }
-
     return r.fields
   }
 })
@@ -30,10 +26,15 @@ const DATE_SORT = [{
   direction: 'desc'
 }]
 
-const getTx = async (rows) => {
+const getTx = async (opt = {}) => {
+  const unredact = (r) => {
+    r.redacted = false
+    return r
+  }
+
   // Pull data (# rows or all) from Airtable
-  const d = await airtable.read(rows ? { maxRecords: rows, sort: DATE_SORT } : { sort: DATE_SORT })
-  return d
+  const d = await airtable.read({ maxRecords: opt.rows ? opt.rows : -1, sort: DATE_SORT })
+  return opt.showAll ? d.map(unredact) : d
 }
 
 const createTx = async (txs) => {

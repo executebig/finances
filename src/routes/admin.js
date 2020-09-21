@@ -3,6 +3,7 @@ const app = express.Router()
 
 const account = require('@services/account')
 const clog = require('@services/clog')
+const tx = require('@libs/tx')
 
 app.use(async (req, res, next) => {
     res.locals.layout = 'admin'
@@ -11,7 +12,20 @@ app.use(async (req, res, next) => {
 })
 
 app.get("/", (req, res) => {
-    res.render('dashboard', { title: "Dashboard" })
+    res.render('admin/dashboard', { title: "Dashboard", showLogs: true })
+})
+
+app.get("/transactions", (req, res) => {
+
+    require('@services/airtable').getTx({ showAll: true }).then((d) => {  
+        const stats = {
+          balance: tx.sum(d),
+          curMonthRev: tx.curMonthRev(d),
+          curMonthExp: tx.curMonthExp(d)
+        }
+
+      res.render('admin/transactions', { title: "Transactions", txs: d, stats: stats })
+    })
 })
 
 // list accounts

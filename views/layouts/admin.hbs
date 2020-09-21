@@ -33,15 +33,19 @@
             </div>
         </section>
 
+        {{>admin/tabs}}
+
         <div class="container main">
             <div class="columns">
-                <div class="column is-half">
+                <div class="column">
                     {{{body}}}
                 </div>
-                <div class="column is-half">
+                {{#if showLogs}}
+                <div class="column">
                     <h1 class="title is-4">Server Logs</h1>
                     <div class="logs" readonly></textarea>
                 </div>
+                {{/if}}
             </div>
         </div>
     </div>

@@ -119,6 +119,10 @@ tr:target {
   margin-bottom: 0;
 }
 
+.meta {
+  margin-bottom: 1rem;
+}
+
 .meta-set .label {
   font-size: 1.5rem;
 }
@@ -126,4 +130,8 @@ tr:target {
 .meta-set .value {
   font-size: 3rem;
   color: #266dd3;
+}
+
+.tabs {
+  margin-bottom: 2rem;
 }
