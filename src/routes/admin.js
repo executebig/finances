@@ -7,7 +7,6 @@ const tx = require('@libs/tx')
 
 app.use(async (req, res, next) => {
     res.locals.layout = 'admin'
-    res.locals.userData = req.user._json
     next()
 })
 

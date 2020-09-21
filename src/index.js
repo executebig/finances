@@ -34,6 +34,11 @@ app.use(passport.session()) // Persistent Sessions
 
 app.use('/static', express.static(path.join(__dirname, '../static')))
 
+app.use(async (req, res, next) => {
+  res.locals.userData = req.user ? req.user._json : null
+  next()
+})
+
 app.get('/', (req, res) => {
   require('@services/airtable').getTx().then((d) => {
 
@@ -47,10 +52,8 @@ app.get('/', (req, res) => {
   })
 })
 
-app.get('/debug', (req, res) => {
-  require('@services/airtable').getTx().then((d) => {
-    res.json(d)
-  })
+app.get("/denied", (req, res) => {
+  res.render("denied", {title: "Access Denied"})
 })
 
 app.use("/auth", require("@routes/auth"))

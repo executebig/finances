@@ -11,9 +11,15 @@
 
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900&display=swap" media="print" onload="this.media='all'" />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900&display=swap" /></noscript>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900&display=swap"
+        media="print" onload="this.media='all'" />
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900" />
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@900&display=swap" />
+        </noscript>
 
     {{{block 'head-inject'}}}
 </head>
@@ -22,8 +28,7 @@
     <div class="Site-Content">
         <section class="hero">
             <div class="hero-body">
-                <div class="container has-text-centered">
-                    <img src="https://executebig.org/images/icons/donate.svg" width="100">
+                <div class="container">
                     <h1 class="title site-title is-size-1 is-size-3-mobile">{{title}}</h1>
                     <p class="subtitle">Home of Execute Big's transparent finance data (a work in progress).</p>
                 </div>
@@ -36,11 +41,12 @@
             </div>
         </section>
 
-        {{>footer}}
     </div>
 
-    <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" type="text/javascript" defer></script>
+    {{>footer}}
     
+    <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" type="text/javascript" defer></script>
+
     {{{block 'foot-inject'}}}
 </body>
 
