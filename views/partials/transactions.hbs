@@ -4,6 +4,10 @@
     </p>
     {{#each txs}}
     <div class="panel-block" href="#">
+        <span class="txDate">
+            {{txDate}}
+        </span>
+        &emsp;
         <span>
             {{#if redacted}}
                 {{#eq category "Donation"}}
@@ -14,9 +18,6 @@
             {{else}}
                 <strong>{{txDisplayName}}</strong>
             {{/if}}
-        </span>
-        <span class="txDate">
-            {{txDate}}
         </span>
 
         <div style="position: absolute; right: 15px;">
