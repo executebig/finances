@@ -34,11 +34,6 @@ app.use(passport.session()) // Persistent Sessions
 
 app.use('/static', express.static(path.join(__dirname, '../static')))
 
-app.use(async (req, res, next) => {
-  res.locals.userData = req.user ? req.user._json : null
-  next()
-})
-
 app.get('/', (req, res) => {
   require('@services/airtable').getTx().then((d) => {
 
