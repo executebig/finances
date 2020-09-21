@@ -118,3 +118,12 @@ tr:target {
 .footer p.user-info {
   margin-bottom: 0;
 }
+
+.meta-set .label {
+  font-size: 1.5rem;
+}
+
+.meta-set .value {
+  font-size: 3rem;
+  color: #266dd3;
+}

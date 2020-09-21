@@ -39,5 +39,5 @@ exports.json = (data, options) => {
 }
 
 exports.currency = (v) => {
-  return v > 0 ? "$" + v.toFixed(2) : "-$" + Math.abs(v).toFixed(2)
+  return v >= 0 ? "$" + v.toFixed(2) : "-$" + Math.abs(v).toFixed(2)
 }

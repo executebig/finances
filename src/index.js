@@ -11,6 +11,7 @@ const middlewares = require('@libs/middlewares')
 const helpers = require('@libs/helpers')
 const passport = require("@services/passport")
 const clog = require("@services/clog")
+const tx = require("@libs/tx")
 
 const app = express()
 const hbs = exphbs.create({ helpers: helpers, extname: '.hbs' })
@@ -35,7 +36,14 @@ app.use('/static', express.static(path.join(__dirname, '../static')))
 
 app.get('/', (req, res) => {
   require('@services/airtable').getTx().then((d) => {
-    res.render('landing', { title: 'Goblin', txs: d })
+
+    const stats = {
+      balance: tx.sum(d),
+      curMonthRev: tx.curMonthRev(d),
+      curMonthExp: tx.curMonthExp(d)
+    }
+
+    res.render('landing', { title: 'Goblin', txs: d, stats: stats })
   })
 })
 
