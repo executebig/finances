@@ -38,7 +38,6 @@ const getTx = async (opt = {}) => {
 }
 
 const createTx = async (txs) => {
-  console.log(txs)
   await airtable.create(txs, { complex: true })
 }
 

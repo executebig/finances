@@ -68,6 +68,7 @@ const syncAccount = (id) => {
               ).toLocaleDateString(),
               Account: 'Mercury',
               'Account ID': id,
+              'Category': "Pending",
               'Mercury Link': tx.dashboardLink
             }
           })
