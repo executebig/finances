@@ -1,3 +1,7 @@
+$primary: #266dd3;
+$secondary: #dd6e42;
+$dark: #2f2f41;
+
 html {
   font-family: 'Inter', sans-serif !important;
   color: #2f2f41;
@@ -88,7 +92,7 @@ h5 {
 }
 
 .site-title {
-  color: #266dd3;
+  color: $primary;
 }
 
 .Site-Content {
@@ -168,7 +172,7 @@ tr {
 .footer {
   margin-top: 2rem;
   padding: 2rem 1.5rem 3rem;
-  background-color: #266dd3;
+  background-color: $primary;
   color: #fff;
   .is-hint {
     color: lightgray;
@@ -198,10 +202,49 @@ tr {
 
   .value {
     font-size: 3rem;
-    color: #266dd3;
+    color: $primary;
   }
 }
 
 .tabs {
   margin-bottom: 2rem;
+}
+
+.transactions {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+
+  .tx-internal-transfer {
+    .tag.amount {
+      background-color: lightgrey;
+    }
+  }
+
+  .tag {
+    &.tx-tag-travel-grant {
+      background-color: $primary;
+      color: #fff;
+    }
+
+    &.tx-tag-donation {
+      background-color: $secondary;
+      color: #fff;
+    }
+
+    &.tx-tag-administrative {
+      background-color: $dark;
+      color: #fff;
+    }
+
+    &.tx-tag-marketing {
+      background-color: $dark;
+      color: #fff;
+    }
+    
+    &.tx-tag-compensation {
+      background-color: $dark;
+      color: #fff;
+    }
+  }
 }

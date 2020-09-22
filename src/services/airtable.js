@@ -16,10 +16,22 @@ const airtable = new AirtablePlus({
     delete r.fields.txUuid
 
     r.fields.id = r.id
+    r.fields.hash = hashify(r.id)
 
     return r.fields
   }
 })
+
+const hashify = (str) => {
+  let hash = 5381,
+    i = str.length
+
+  while (i) {
+    hash = (hash * 33) ^ str.charCodeAt(--i)
+  }
+
+  return hash >>> 0
+}
 
 const DATE_SORT = [{
   field: 'Tx Date',

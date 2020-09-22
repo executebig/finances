@@ -1,9 +1,9 @@
-<article class="panel is-link">
+<article class="panel is-link transactions">
     <p class="panel-heading">
         All Transactions
     </p>
     {{#each txs}}
-    <div class="panel-block" href="#">
+    <div class="panel-block tx-{{slugify category}}" data-txID="{{hash}}" title="Tx Hash: {{hash}}">
         <span class="txDate">
             {{txDate}}
         </span>
@@ -21,8 +21,8 @@
         </span>
 
         <div style="position: absolute; right: 15px;">
-            <span class="tag is-dark">{{category}}</span>
-            <span class="tag is-link">{{currency txAmount}}</span>
+            <span class="tag tx-tag-{{slugify category}}">{{category}}</span>
+            <span class="tag is-link amount">{{currency txAmount}}</span>
         </div>
     </div>
     {{/each}}
