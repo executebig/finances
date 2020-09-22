@@ -4,6 +4,9 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const path = require("path")
 const cookieSession = require('cookie-session')
+const minifyHTML = require('express-minify-html')
+const compression = require('compression')
+const sassMiddleware = require('node-sass-middleware')
 
 const config = require('@config')
 
@@ -18,8 +21,31 @@ const hbs = exphbs.create({ helpers: helpers, extname: '.hbs' })
 const server = require('http').createServer(app);
 const io = require('socket.io')(server)
 
+app.use(
+  minifyHTML({
+    override: true,
+    exception_url: false,
+    htmlMinifier: {
+      removeComments: true,
+      collapseWhitespace: true,
+      collapseBooleanAttributes: true,
+      removeAttributeQuotes: true,
+      removeEmptyAttributes: true,
+      minifyJS: true
+    }
+  })
+)
+app.use(compression())
 app.engine('.hbs', hbs.engine)
 app.set('view engine', '.hbs')
+app.use(
+  sassMiddleware({
+    src: path.join(__dirname, './styles'),
+    dest: path.join(__dirname, '../static/assets/css'),
+    outputStyle: 'compressed',
+    prefix: '/static/assets/css/'
+  })
+)
 
 app.use(middlewares.logger)
 
@@ -43,7 +69,7 @@ app.get('/', (req, res) => {
       curMonthExp: tx.curMonthExp(d)
     }
 
-    res.render('landing', { title: 'Goblin', txs: d, stats: stats })
+    res.render('landing', { title: 'Finances', txs: d, stats: stats })
   })
 })
 
