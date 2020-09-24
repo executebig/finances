@@ -43,9 +43,11 @@ exports.json = (data, options) => {
 }
 
 exports.currency = (v) => {
+  const thirds = /\B(?=(\d{3})+(?!\d))/g
+
   return v >= 0
-    ? '$' + v.toFixed(2)
-    : '-$' + Math.abs(v).toFixed(2)
+    ? '$' + v.toFixed(2).replace(thirds, ",")
+    : '-$' + Math.abs(v).toFixed(2).replace(thirds, ",")
 }
 
 exports.ifCond = (v1, operator, v2, options) => {

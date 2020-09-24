@@ -95,6 +95,22 @@ h5 {
   color: $primary;
 }
 
+.hero {
+  position: relative;
+
+  img {
+    position: absolute;
+    right: -5%;
+    opacity: 0.2;
+    height: 125%;
+    top: -12.5%;
+
+    @media only screen and (max-width: 729px) {
+      display: none;
+    }
+  }
+}
+
 .Site-Content {
   flex: 1;
 }
@@ -126,21 +142,6 @@ h5 {
   }
 }
 
-td {
-  vertical-align: middle !important;
-  &:nth-child(1) {
-    font-weight: 800;
-    width: 40%;
-  }
-}
-
-tr {
-  height: 72px;
-  &:target {
-    background: #fffacd;
-  }
-}
-
 .section.main-section {
   padding-top: 0;
 }
@@ -148,13 +149,6 @@ tr {
 .panel {
   box-shadow: none;
   border: 1px solid rgba(47, 47, 65, 0.2);
-}
-
-.txDate {
-  margin-left: 5px;
-  color: rgba(47, 47, 65, 0.5);
-  font-family: 'Space Mono', monospace;
-  font-weight: 700;
 }
 
 #copyright {
@@ -167,6 +161,7 @@ tr {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  margin-bottom: 5px;
 }
 
 .footer {
@@ -211,9 +206,25 @@ tr {
 }
 
 .transactions {
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-user-drag: none;
+  border-collapse: collapse;
+  width: 100%;
+  border-spacing: 2px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 2rem;
+
+  thead {
+    font-family: 'Nunito', Helvetica, Arial, sans-serif,
+      -apple-system;
+  }
+
+  .tx-positive {
+    background-color: rgba(51, 214, 166, 0.125);
+  }
+
+  .tx-negative {
+    background-color: rgba(236, 55, 80, 0.125);
+  }
 
   .tx-internal-transfer {
     .tag.amount {
@@ -241,7 +252,7 @@ tr {
       background-color: $dark;
       color: #fff;
     }
-    
+
     &.tx-tag-compensation {
       background-color: $dark;
       color: #fff;

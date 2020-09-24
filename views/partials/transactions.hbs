@@ -1,29 +1,36 @@
-<article class="panel is-link transactions">
-    <p class="panel-heading">
-        All Transactions
-    </p>
-    {{#each txs}}
-    <div class="panel-block tx-{{slugify category}}" data-txID="{{hash}}" title="Tx Hash: {{hash}}">
-        <span class="txDate">
-            {{txDate}}
-        </span>
-        &emsp;
-        <span>
-            {{#if redacted}}
-                {{#eq category "Donation"}}
-                <i>ANONYMOUS DONATION</i>
-                {{else}}
-                <i>TRANSACTION RECIPIENT REDACTED</i>
-                {{/eq}}
-            {{else}}
-                <strong>{{txDisplayName}}</strong>
-            {{/if}}
-        </span>
+<div class="table-container">
+    <table class="table transactions">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each txs}}
+            <tr class="tx-{{slugify category}} {{#ifCond txAmount "<" 0}}tx-negative{{else}}tx-positive{{/ifCond}}" data-txID="{{hash}}">
+                <td class="txDate">
+                    {{txDate}}
+                </td>
+                <td>
+                    {{#if redacted}}
+                    {{#eq category "Donation"}}
+                    <i>Anonymous Donation ({{../hash}})</i>
+                    {{else}}
+                    <i>Recipient Redacted ({{../hash}})</i>
+                    {{/eq}}
+                    {{else}}
+                    <strong>{{txDisplayName}}</strong>
+                    {{/if}}
+                </td>
 
-        <div style="position: absolute; right: 15px;">
-            <span class="tag tx-tag-{{slugify category}}">{{category}}</span>
-            <span class="tag is-link amount">{{currency txAmount}}</span>
-        </div>
-    </div>
-    {{/each}}
-</article>
+                <td><span class="tag tx-tag-{{slugify category}}">{{category}}</span></td>
+
+                <td class="amount">{{currency txAmount}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
