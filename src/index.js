@@ -64,14 +64,7 @@ app.use('/static', express.static(path.join(__dirname, '../static')))
 
 app.get('/', (req, res) => {
   require('@services/airtable').getTx().then((d) => {
-
-    const stats = {
-      balance: tx.sum(d),
-      curMonthRev: tx.curMonthRev(d),
-      curMonthExp: tx.curMonthExp(d)
-    }
-
-    res.render('landing', { title: 'Finances', txs: d, stats: stats })
+    res.render('landing', { title: 'Finances', txs: d })
   })
 })
 

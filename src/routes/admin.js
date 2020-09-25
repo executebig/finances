@@ -23,16 +23,9 @@ app.get('/transactions', (req, res) => {
   require('@services/airtable')
     .getTx({ showAll: true })
     .then((d) => {
-      const stats = {
-        balance: tx.sum(d),
-        curMonthRev: tx.curMonthRev(d),
-        curMonthExp: tx.curMonthExp(d)
-      }
-
       res.render('admin/transactions', {
         title: 'Transactions',
-        txs: d,
-        stats: stats
+        txs: d
       })
     })
 })
