@@ -76,7 +76,7 @@ app.get('/', (req, res) => {
 app.get("/denied", (req, res) => {
   res.render("denied", {title: "Access Denied"})
 })
-
+app.use("/api", require("@routes/api"))
 app.use("/auth", require("@routes/auth"))
 app.use("/admin", middlewares.isUserAuthenticated , require("@routes/admin"))
 

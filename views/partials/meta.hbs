@@ -1,18 +1,41 @@
-<div class="container meta">
+<div class="container meta" id="meta">
     <div class="columns">
         <div class="column meta-set">
             <h1 class="label">Total Balance</h1>
-            <h3 class="value">{{currency stats.balance}}</h3>
+            <h3 class="value is-loading" id="meta-balance">&nbsp;</h3>
         </div>
-        
+
         <div class="column meta-set">
             <h1 class="label">Donation This Month</h1>
-            <h3 class="value">{{currency stats.curMonthRev}}</h3>
+            <h3 class="value is-loading" id="meta-donation">&nbsp;</h3>
         </div>
-        
+
         <div class="column meta-set">
             <h1 class="label">Expenditure This Month</h1>
-            <h3 class="value">{{currency stats.curMonthExp}}</h3>
+            <h3 class="value is-loading" id="meta-expenditure">&nbsp;</h3>
         </div>
     </div>
 </div>
+
+<script>
+    window.onload = () => {
+        fetch("/api/stats").then(data => data.json())
+            .then((d) => {
+                document.getElementById("meta-balance").innerText = currency(d.balance)
+                document.getElementById("meta-donation").innerText = currency(d.curMonthRev)
+                document.getElementById("meta-expenditure").innerText = currency(d.curMonthExp)
+                document.getElementById("meta-balance").classList.remove("is-loading")
+                document.getElementById("meta-donation").classList.remove("is-loading")
+                document.getElementById("meta-expenditure").classList.remove("is-loading")
+                
+            })
+    }
+
+    const currency = (v) => {
+        const thirds = /\B(?=(\d{3})+(?!\d))/g
+
+        return v >= 0
+            ? '$' + v.toFixed(2).replace(thirds, ",")
+            : '-$' + Math.abs(v).toFixed(2).replace(thirds, ",")
+    }
+</script>

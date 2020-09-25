@@ -10,19 +10,19 @@
         </thead>
         <tbody>
             {{#each txs}}
-            <tr class="tx-{{slugify category}} {{#ifCond txAmount "<" 0}}tx-negative{{else}}tx-positive{{/ifCond}}" data-txID="{{hash}}">
+            <tr class="tx-{{slugify category}} {{#ifCond txAmount "<" 0}}tx-negative{{else}}tx-positive{{/ifCond}}">
                 <td class="txDate">
                     {{txDate}}
                 </td>
                 <td>
                     {{#if redacted}}
-                    {{#eq category "Donation"}}
-                    <i>Anonymous Donation ({{../hash}})</i>
+                        {{#eq category "Donation"}}
+                            <i>Anonymous Donation ({{../hash}})</i>
+                        {{else}}
+                            <i>Recipient Redacted ({{../hash}})</i>
+                        {{/eq}}
                     {{else}}
-                    <i>Recipient Redacted ({{../hash}})</i>
-                    {{/eq}}
-                    {{else}}
-                    <strong>{{txDisplayName}}</strong>
+                        {{txDisplayName}}
                     {{/if}}
                 </td>
 

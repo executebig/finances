@@ -4,6 +4,8 @@ const clog = require('@services/clog')
 const AirtablePlus = require('airtable-plus')
 const TX_TABLE = "Transactions"
 
+let DATA_CACHE = {}
+
 const airtable = new AirtablePlus({
   baseID: config.airtable.base,
   apiKey: config.airtable.key,
@@ -44,9 +46,19 @@ const getTx = async (opt = {}) => {
     return r
   }
 
-  // Pull data (# rows or all) from Airtable
-  const d = await airtable.read({ maxRecords: opt.rows ? opt.rows : -1, sort: DATE_SORT })
-  return opt.showAll ? d.map(unredact) : d
+  const hash = hashify(JSON.stringify(opt))
+
+  if (!DATA_CACHE[hash]) {
+    // Pull data (# rows or all) from Airtable
+    console.log(`Asking airtable for #${hash}...`)
+    const d = await airtable.read({ maxRecords: opt.rows ? opt.rows : -1, sort: DATE_SORT })
+    DATA_CACHE[hash] = d
+
+    return opt.showAll ? d.map(unredact) : d
+  } else {
+    console.log(`Found #${hash} in local cache...`)
+    return opt.showAll ? DATA_CACHE[hash].map(unredact) : DATA_CACHE[hash]
+  }
 }
 
 const createTx = async (txs) => {

@@ -1,6 +1,17 @@
+$colors: null;
+
+@import '../../node_modules/bulma/sass/utilities/_all';
+
 $primary: #266dd3;
 $secondary: #dd6e42;
 $dark: #2f2f41;
+
+$family-primary: 'Inter', sans-serif;
+$family-secondary: 'Nunito', Helvetica, Arial, sans-serif, -apple-system;
+
+h1,h2,h3,h4,h5, .title, .subtitle {
+  font-family: $family-secondary;
+}
 
 html {
   font-family: 'Inter', sans-serif !important;
@@ -15,83 +26,7 @@ body {
   flex-direction: column;
 }
 
-button {
-  font-family: 'Inter', sans-serif !important;
-  color: #2f2f41;
-}
-
-input {
-  font-family: 'Inter', sans-serif !important;
-  color: #2f2f41;
-}
-
-select {
-  font-family: 'Inter', sans-serif !important;
-  color: #2f2f41;
-}
-
-textarea {
-  font-family: 'Inter', sans-serif !important;
-  color: #2f2f41;
-}
-
-h1 {
-  font-family: 'Nunito', Helvetica, Arial, sans-serif,
-    -apple-system;
-  font-weight: 900;
-  color: #2f2f41;
-  line-height: 1.25;
-}
-
-h2 {
-  font-family: 'Nunito', Helvetica, Arial, sans-serif,
-    -apple-system;
-  font-weight: 900;
-  color: #2f2f41;
-  line-height: 1.25;
-}
-
-h3 {
-  font-family: 'Nunito', Helvetica, Arial, sans-serif,
-    -apple-system;
-  font-weight: 900;
-  color: #2f2f41;
-  line-height: 1.25;
-}
-
-h4 {
-  font-family: 'Nunito', Helvetica, Arial, sans-serif,
-    -apple-system;
-  font-weight: 900;
-  color: #2f2f41;
-  line-height: 1.25;
-}
-
-h5 {
-  font-family: 'Nunito', Helvetica, Arial, sans-serif,
-    -apple-system;
-  font-weight: 900;
-  color: #2f2f41;
-  line-height: 1.25;
-}
-
-.subtitle {
-  font-family: 'Nunito', Helvetica, Arial, sans-serif,
-    -apple-system;
-  font-weight: 900;
-  color: #2f2f41;
-  line-height: 1.25;
-}
-
-.title {
-  font-family: 'Nunito', Helvetica, Arial, sans-serif,
-    -apple-system;
-  font-weight: 900;
-  color: #2f2f41;
-  line-height: 1.25;
-}
-
-.site-title {
+h1.site-title {
   color: $primary;
 }
 
@@ -164,7 +99,7 @@ h5 {
   margin-bottom: 5px;
 }
 
-.footer {
+.footer.branded {
   margin-top: 2rem;
   padding: 2rem 1.5rem 3rem;
   background-color: $primary;
@@ -186,7 +121,7 @@ h5 {
   }
 }
 
-.meta {
+.meta#meta {
   margin-bottom: 1rem;
 }
 
@@ -198,6 +133,22 @@ h5 {
   .value {
     font-size: 3rem;
     color: $primary;
+    position: relative;
+
+    &.is-loading {
+      pointer-events: none;
+      opacity: 1;
+
+      &:after {
+        @include loader;
+        position: absolute;
+        top: 1.5rem;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        border-width: 5px;
+      }
+    }
   }
 }
 
@@ -268,3 +219,9 @@ h5 {
     }
   }
 }
+
+div.notification.admin-note {
+  margin-bottom: 0;
+}
+
+@import '../../node_modules/bulma/bulma.sass';
