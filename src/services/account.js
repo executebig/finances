@@ -50,11 +50,6 @@ const syncAccount = (id) => {
         if (!v) {
           tx = data.transactions[i]
 
-          if (tx.status == 'failed') {
-            clog.log(`Transaction ${id} failed. Skipping...`)
-            return
-          }
-
           const isNegative = tx.amount < 0
           const displayString = isNegative
             ? 'PAYMENT TO ' + tx.counterpartyName

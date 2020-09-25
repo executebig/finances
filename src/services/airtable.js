@@ -74,6 +74,9 @@ const findTx = async (tx) => {
 
   if (row[0]) {
     clog.log(`Transaction ${tx.id} exists. No action taken.`)
+  } else if (tx.status === 'failed') {
+    clog.log(`Transaction ${tx.id} failed. Skipping...`)
+    return true // override for failed transactions
   } else {
     clog.log(`Found new transaction ${tx.id}. New entry merged.`, "success")
   }
