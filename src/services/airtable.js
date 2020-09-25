@@ -63,6 +63,7 @@ const getTx = async (opt = {}) => {
 
 const createTx = async (txs) => {
   await airtable.create(txs, { complex: true })
+  clearCache()
 }
 
 const findTx = async (tx) => {
@@ -80,4 +81,9 @@ const findTx = async (tx) => {
   return row[0] ? row[0] : null
 }
 
-module.exports = { getTx, createTx, findTx }
+const clearCache = () => {
+  DATA_CACHE = {}
+  clog.log(`Cache cleared!`, "success")
+}
+
+module.exports = { getTx, createTx, findTx, clearCache }
