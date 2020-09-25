@@ -1,4 +1,5 @@
 <div class="table-container">
+    <a class="button" id="clear-filter">Clear Filter</a>
     <table class="table transactions">
         <thead>
             <tr>
@@ -10,23 +11,24 @@
         </thead>
         <tbody>
             {{#each txs}}
-            <tr class="tx-{{slugify category}} {{#ifCond txAmount "<" 0}}tx-negative{{else}}tx-positive{{/ifCond}}">
+            <tr class="tx tx-{{slugify category}} {{#ifCond txAmount "<" 0}}tx-negative{{else}}tx-positive{{/ifCond}}">
                 <td class="txDate">
                     {{txDate}}
                 </td>
                 <td>
                     {{#if redacted}}
-                        {{#eq category "Donation"}}
-                            <i>Anonymous Donation ({{../hash}})</i>
-                        {{else}}
-                            <i>Recipient Redacted ({{../hash}})</i>
-                        {{/eq}}
+                    {{#eq category "Donation"}}
+                    <i>Anonymous Donation ({{../hash}})</i>
                     {{else}}
-                        {{txDisplayName}}
+                    <i>Recipient Redacted ({{../hash}})</i>
+                    {{/eq}}
+                    {{else}}
+                    {{txDisplayName}}
                     {{/if}}
                 </td>
 
-                <td class="tx-category"><span class="dot tx-dot-{{slugify category}}"></span>{{category}}</td>
+                <td class="tx-category category-selector" data-filter="{{slugify category}}"><span
+                            class="dot tx-dot-{{slugify category}}"></span><span>{{category}}</span></td>
 
                 <td class="amount">{{currency txAmount}}</td>
             </tr>
@@ -34,3 +36,31 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    const clearButton = document.getElementById("clear-filter")
+
+    function filterLogs(c) {
+        let x, i;
+        x = document.querySelectorAll("tr.tx");
+
+        if (c === "all") {
+            clearButton.classList.remove("active")
+        } else {
+            clearButton.classList.add("active")
+        }
+
+        for (i = 0; i < x.length; i++) {
+            x[i].classList.remove("hidden")
+
+            if (c !== "all" && !x[i].classList.contains(`tx-${c}`))
+                x[i].classList.add("hidden")
+        }
+    }
+
+    document.querySelectorAll('.category-selector').forEach((el) => {
+        el.addEventListener('click', () => { filterLogs(el.dataset.filter) })
+    })
+
+    clearButton.addEventListener('click', () => { filterLogs("all") })
+</script>
