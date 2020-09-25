@@ -216,6 +216,10 @@ h5 {
   thead {
     font-family: 'Nunito', Helvetica, Arial, sans-serif,
       -apple-system;
+
+    tr {
+      text-align: left;
+    }
   }
 
   .tx-positive {
@@ -232,30 +236,28 @@ h5 {
     }
   }
 
-  .tag {
-    &.tx-tag-travel-grant {
-      background-color: $primary;
-      color: #fff;
+  .dot {
+    font-size: 12px;
+    margin-right: 10px;
+
+    &.tx-dot-travel-grant {
+      color: $primary;
     }
 
-    &.tx-tag-donation {
-      background-color: $secondary;
-      color: #fff;
+    &.tx-dot-donation {
+      color: $secondary;
     }
 
-    &.tx-tag-administrative {
-      background-color: $dark;
-      color: #fff;
+    &.tx-dot-administrative {
+      color: $dark;
     }
 
-    &.tx-tag-marketing {
-      background-color: $dark;
-      color: #fff;
+    &.tx-dot-marketing {
+      color: $dark;
     }
 
-    &.tx-tag-compensation {
-      background-color: $dark;
-      color: #fff;
+    &.tx-dot-compensation {
+      color: $dark;
     }
   }
 }
