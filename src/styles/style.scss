@@ -237,27 +237,34 @@ h5 {
   }
 
   .dot {
-    font-size: 12px;
+    height: 9px;
+    width: 9px;
+    border-radius: 50%;
+    display: inline-block;
     margin-right: 10px;
 
     &.tx-dot-travel-grant {
-      color: $primary;
+      background-color: $primary;
     }
 
     &.tx-dot-donation {
-      color: $secondary;
+      background-color: $secondary;
+    }
+
+    &.tx-dot-internal-transfer {
+      background-color: lightgray;
     }
 
     &.tx-dot-administrative {
-      color: $dark;
+      background-color: $dark;
     }
 
     &.tx-dot-marketing {
-      color: $dark;
+      background-color: $dark;
     }
 
     &.tx-dot-compensation {
-      color: $dark;
+      background-color: $dark;
     }
   }
 }
