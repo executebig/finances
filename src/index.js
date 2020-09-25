@@ -75,6 +75,8 @@ app.use("/api", require("@routes/api"))
 app.use("/auth", require("@routes/auth"))
 app.use("/admin", middlewares.isUserAuthenticated , require("@routes/admin"))
 
-server.listen(config.port);
+server.listen(config.port, () => {
+  console.log(`Server started at ${config.host}`)
+});
 
 clog.start(io)
