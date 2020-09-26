@@ -20,7 +20,7 @@
                 </td>
                 <td>
                     {{#ifCond redacted "&&" (not ../adminOverride)}}
-                        {{#eq category "Donation"}}
+                        {{#eq ../category "Donation"}}
                         <i class="redacted">Anonymous Donation</i>
                         {{else}}
                         <i class="redacted">Recipient Redacted</i>
