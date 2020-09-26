@@ -7,6 +7,7 @@ const cookieSession = require('cookie-session')
 const minifyHTML = require('express-minify-html')
 const compression = require('compression')
 const sassMiddleware = require('node-sass-middleware')
+const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const config = require('@config')
@@ -23,6 +24,7 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server)
 
 app.use(cors())
+app.use(bodyParser.json())
 app.use(
   minifyHTML({
     override: true,

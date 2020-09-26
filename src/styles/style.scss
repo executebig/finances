@@ -209,6 +209,10 @@ h1.site-title {
           cursor: pointer;
         }
       }
+
+      i.redacted {
+        color: rgba(119, 136, 153, 0.8);
+      }
     }
 
     .tx-internal-transfer {
@@ -247,6 +251,38 @@ h1.site-title {
       &.tx-dot-compensation {
         background-color: $dark;
       }
+    }
+  }
+}
+
+.transaction-single {
+  tr {
+    &[changable] {
+      td:first-child {
+        font-weight: bold;
+      }
+    }
+
+    &:not([changable]) {
+      td {
+        color: lightslategray
+      }
+    }
+  }
+}
+
+form#receipt {
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(38,109,211,.08);
+  height: 100%;
+  position: relative;
+  .dz-message {
+    height: 100%;
+    margin: 0;
+
+    .dz-button {
+      height: 100%;
     }
   }
 }

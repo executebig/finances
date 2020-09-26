@@ -46,8 +46,8 @@ exports.currency = (v) => {
   const thirds = /\B(?=(\d{3})+(?!\d))/g
 
   return v >= 0
-    ? '$' + v.toFixed(2).replace(thirds, ",")
-    : '-$' + Math.abs(v).toFixed(2).replace(thirds, ",")
+    ? '$' + v.toFixed(2).replace(thirds, ',')
+    : '-$' + Math.abs(v).toFixed(2).replace(thirds, ',')
 }
 
 exports.ifCond = (v1, operator, v2, options) => {
@@ -102,4 +102,17 @@ exports.slugify = (str) => {
     .toLowerCase()
     .replace(/ /g, '-')
     .replace(/[^\w-]+/g, '')
+}
+
+exports.not = (bool) => {
+  return !bool
+}
+
+exports.changeable = (key, options) => {
+  const CHANGEABLE_FIELDS = [
+    'Category',
+    'Tx Display Name'
+  ] 
+
+  return CHANGEABLE_FIELDS.includes(key) ? options.fn(this) : options.inverse(this)
 }

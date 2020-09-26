@@ -1,10 +1,34 @@
 const express = require('express')
+const multer = require('multer')
+const mime = require('mime-types')
+const fs = require('fs')
 const app = express.Router()
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './static/uploaded')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix =
+      Date.now() + '-' + Math.round(Math.random() * 1e9)
+    cb(
+      null,
+      req.params.id +
+        '-' +
+        uniqueSuffix +
+        '.' +
+        mime.extension(file.mimetype)
+    )
+  }
+})
+const upload = multer({ storage: storage })
 
 const account = require('@services/account')
 const db = require('@services/airtable')
 const clog = require('@services/clog')
 const tx = require('@libs/tx')
+const config = require('@config')
+const { result } = require('lodash')
 
 app.use(async (req, res, next) => {
   res.locals.layout = 'admin'
@@ -20,15 +44,52 @@ app.get('/', (req, res) => {
 })
 
 app.get('/transactions', (req, res) => {
-  require('@services/airtable')
-    .getTx({ showAll: true })
-    .then((d) => {
-      res.render('admin/transactions', {
-        title: 'Transactions',
-        txs: d
+  db.getTx({ showAll: true }).then((d) => {
+    res.render('admin/transactions', {
+      title: 'Transactions',
+      txs: d
+    })
+  })
+})
+
+app.get('/transactions/:id', (req, res) => {
+  db.findTxById(req.params.id).then((d) => {
+    console.log(d)
+    res.render('admin/transaction-single', {
+      title: `Tx #${d.txId}`,
+      tx: d
+    })
+  })
+})
+
+app.post('/transactions/:id', (req, res) => {
+  db.updateTx(req.params.id, req.body)
+})
+
+app.post(
+  '/transactions/receipt/:id',
+  upload.single('file'),
+  (req, res) => {
+    const data = {
+      Receipt: [
+        {
+          url: config.host + '/' + req.file.path
+        }
+      ]
+    }
+
+    db.updateTx(req.params.id, data).then((result) => {
+      fs.unlink(req.file.path, (err) => {
+        if (err) {
+          console.log(err)
+          res.status(500)
+        }
+      
+        res.status(200)
       })
     })
-})
+  }
+)
 
 // list accounts
 app.get('/sync', async (req, res) => {

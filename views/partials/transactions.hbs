@@ -7,6 +7,9 @@
                 <th>Description</th>
                 <th>Category</th>
                 <th>Amount</th>
+                {{#if adminOverride}}
+                <th>Manage</th>
+                {{/if}}
             </tr>
         </thead>
         <tbody>
@@ -16,21 +19,25 @@
                     {{txDate}}
                 </td>
                 <td>
-                    {{#if redacted}}
-                    {{#eq category "Donation"}}
-                    <i>Anonymous Donation ({{../hash}})</i>
+                    {{#ifCond redacted "&&" (not ../adminOverride)}}
+                        {{#eq category "Donation"}}
+                        <i class="redacted">Anonymous Donation</i>
+                        {{else}}
+                        <i class="redacted">Recipient Redacted</i>
+                        {{/eq}}
                     {{else}}
-                    <i>Recipient Redacted ({{../hash}})</i>
-                    {{/eq}}
-                    {{else}}
-                    {{txDisplayName}}
-                    {{/if}}
+                        {{../txDisplayName}}
+                    {{/ifCond}}
                 </td>
 
                 <td class="tx-category category-selector" data-filter="{{slugify category}}"><span
                             class="dot tx-dot-{{slugify category}}"></span><span>{{category}}</span></td>
 
                 <td class="amount">{{currency txAmount}}</td>
+
+                {{#if ../adminOverride}}
+                <td class="manage"><a href="/admin/transactions/{{id}}">Edit</a></td>
+                {{/if}}
             </tr>
             {{/each}}
         </tbody>

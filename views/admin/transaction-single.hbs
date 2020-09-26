@@ -1,0 +1,66 @@
+{{#extend "head-inject"}}
+<link rel="stylesheet" href="/static/assets/css/dropzone.min.css">
+{{/extend}}
+
+<div class="columns">
+    <div class="column is-two-thirds-desktop">
+        <table class="table transaction-single">
+            <tbody>
+                {{#each tx}}
+                <tr {{#changeable @key}}changable{{/changeable}}>
+                    <td>{{@key}}</td>
+                    <td data-key="{{@key}}" data-id="{{../tx.id}}">{{this}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="column">
+        <form id="receipt" action="/admin/transactions/receipt/{{tx.id}}" method="POST"
+            class="dropzone needsclick dz-clickable" enctype="multipart/form-data">
+            <div class="dz-message">
+                <button class="dz-button" type="button">Upload Receipt Here (Single File)</button>
+            </div>
+            <div class="fallback">
+                <input name="file" type="file" multiple />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll("table tr[changable] td:nth-child(2)").forEach(function (node) {
+        node.ondblclick = function () {
+            var val = this.innerHTML;
+            var input = document.createElement("input");
+            input.value = val;
+            input.classList.add("input")
+            input.dataset.key = this.dataset.key
+            input.dataset.id = this.dataset.id
+            input.onblur = function () {
+                const newVal = this.value;
+                const key = input.dataset.key
+
+                this.parentNode.innerHTML = newVal;
+
+                if (val !== newVal) {
+                    fetch(`/admin/transactions/${this.dataset.id}`, {
+                        method: 'POST', headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            [key]: newVal
+                        })
+                    })
+                }
+            }
+            this.innerHTML = "";
+            this.appendChild(input);
+            input.focus();
+        }
+    });
+</script>
+
+{{#extend "foot-inject"}}
+<script src="/static/assets/js/dropzone.min.js"></script>
+{{/extend}}
