@@ -54,7 +54,7 @@ app.get('/transactions', (req, res) => {
 
 app.get('/transactions/:id', (req, res) => {
   db.findTxById(req.params.id).then((d) => {
-    if (d['Recceipt']) {
+    if (d['Receipt']) {
       d['Receipt'] = d['Receipt'][0]['url']
     }
 
