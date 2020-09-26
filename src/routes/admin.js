@@ -79,14 +79,16 @@ app.post(
     }
 
     db.updateTx(req.params.id, data).then((result) => {
-      fs.unlink(req.file.path, (err) => {
-        if (err) {
-          console.log(err)
-          res.status(500)
-        }
-      
-        res.status(200)
-      })
+      setTimeout(() => {
+        fs.unlink(req.file.path, (err) => {
+          if (err) {
+            console.log(err)
+            res.status(500)
+          }
+        
+          res.status(200)
+        })
+      }, 10000) // Delete after 10 seconds
     })
   }
 )
