@@ -93,6 +93,8 @@ app.post(
           res.status(200)
         })
       }, 10000) // Delete after 10 seconds
+    }).finally(() => {
+      res.status(200).send(req.file);
     })
   }
 )
