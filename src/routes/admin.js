@@ -54,7 +54,9 @@ app.get('/transactions', (req, res) => {
 
 app.get('/transactions/:id', (req, res) => {
   db.findTxById(req.params.id).then((d) => {
-    d['Receipt'] = d['Receipt'][0]['url']
+    if (d['Recceipt']) {
+      d['Receipt'] = d['Receipt'][0]['url']
+    }
 
     res.render('admin/transaction-single', {
       title: `Tx #${d['Tx ID']}`,
@@ -86,8 +88,8 @@ app.post(
             console.log(err)
             res.status(500)
           }
-        
-          console.log("Deleted file at " + req.file.path)
+
+          console.log('Deleted file at ' + req.file.path)
           res.status(200)
         })
       }, 10000) // Delete after 10 seconds
