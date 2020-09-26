@@ -256,6 +256,8 @@ h1.site-title {
 }
 
 .transaction-single {
+  width: 100%;
+  
   tr {
     &[changable] {
       td:first-child {
@@ -265,7 +267,7 @@ h1.site-title {
 
     &:not([changable]) {
       td {
-        color: lightslategray
+        color: lightslategray;
       }
     }
   }
@@ -274,7 +276,7 @@ h1.site-title {
 form#receipt {
   border: none;
   border-radius: 10px;
-  background-color: rgba(38,109,211,.08);
+  background-color: rgba(38, 109, 211, 0.08);
   height: 100%;
   position: relative;
   .dz-message {

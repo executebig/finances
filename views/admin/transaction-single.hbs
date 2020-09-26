@@ -9,7 +9,7 @@
                 {{#each tx}}
                 <tr {{#changeable @key}}changable{{/changeable}}>
                     <td>{{@key}}</td>
-                    <td data-key="{{@key}}" data-id="{{../tx.id}}">{{this}}</td>
+                    <td data-key="{{@key}}" data-id="{{../tx.id}}">{{#isLink this}}<a href="{{../this}}" target="_blank">Link »</a>{{else}}{{../this}}{{/isLink}}</td>
                 </tr>
                 {{/each}}
             </tbody>

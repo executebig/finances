@@ -109,10 +109,27 @@ exports.not = (bool) => {
 }
 
 exports.changeable = (key, options) => {
-  const CHANGEABLE_FIELDS = [
-    'Category',
-    'Tx Display Name'
-  ] 
+  const CHANGEABLE_FIELDS = ['Category', 'Tx Display Name']
 
-  return CHANGEABLE_FIELDS.includes(key) ? options.fn(this) : options.inverse(this)
+  return CHANGEABLE_FIELDS.includes(key)
+    ? options.fn(this)
+    : options.inverse(this)
+}
+
+exports.isLink = (str, options) => {
+  const res = str.toString().includes("://") && isValidUrl(str)
+
+  return res
+    ? options.fn(this)
+    : options.inverse(this)
+}
+
+const isValidUrl = (url) => {
+  try {
+    new URL(url)
+  } catch (_) {
+    return false
+  }
+
+  return true
 }
