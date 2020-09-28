@@ -8,7 +8,7 @@
  */
 const sum = (txs) => {
     let sum = 0
-    for (i in txs) {
+    for (let i in txs) {
         sum += parseFloat(txs[i].txAmount)
     }
     return sum
@@ -24,7 +24,7 @@ const curMonthRev = (txs) => {
     const year = new Date().getFullYear()
     const month = new Date().getMonth() + 1
 
-    for (i in txs) {
+    for (let i in txs) {
 
         if (txs[i].category === "Donation") {
             const txDate = txs[i].txDate.split("-")
@@ -50,7 +50,7 @@ const curMonthExp = (txs) => {
     const year = new Date().getFullYear()
     const month = new Date().getMonth() + 1
 
-    for (i in txs) {
+    for (let i in txs) {
         const txDate = txs[i].txDate.split("-")
         const txYear = Number(txDate[0])
         const txMonth = Number(txDate[1])
