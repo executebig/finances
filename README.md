@@ -1,4 +1,7 @@
-# Goblin/Finances
+<a href="https://finances.executebig.org/">
+<p align="center"><img width="100px" height="100px" alt="Hack Club icon" src="static/assets/icon.png"></p>
+<h1 align="center"><strong>Goblin/Finances</strong></h1>
+</a>
 
 Goblin is [Execute Big](https://executebig.org)'s handler for accessing finance-related information. It is a part of our commitment to achieve 100% financial transparency.
 
@@ -12,6 +15,7 @@ Execute Big runs on [Mercury](https://mercury.com). This service interacts with 
     * Unless you are contributing to the syncing engine between Mercury and Airtable, a Mercury API key is not required, and you can replace it with a random string for the time being. 
     * You will need a redacted copy of our Airtable data. Please acquire a template Airtable base by reaching out to us. 
     * You may skip over the admin dashboard's OAuth login locally by removing the `isUserAuthenticated` middleware from the admin router. If prompted for API keys before running, simply use a random string as a placeholder.  
+    * Always use a read-only Mercury key. You may need to be IP whitelisted (if you do not have a stable IP address, let us know so we can help tunneling you through our server).
 
 1. Update `PORT` to 3000 and `HOST` to `http://localhost:3000` or whatever you prefer your development server to be running on.
 
