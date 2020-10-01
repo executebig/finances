@@ -71,28 +71,30 @@ app.post('/transactions/:id', (req, res) => {
 
 app.post(
   '/transactions/receipt/:id',
-  upload.single('file'),
+  upload.any(),
   (req, res) => {
     const data = {
-      Receipt: [
-        {
-          url: config.host + '/' + req.file.path
+      Receipt: req.files.map(file => {
+        return {
+          url: config.host + '/' + file.path
         }
-      ]
+      })
     }
 
     db.updateTx(req.params.id, data).then((result) => {
-      setTimeout(() => {
-        fs.unlink(req.file.path, (err) => {
-          if (err) {
-            console.log(err)
-            res.status(500)
-          }
+      req.files.forEach(file => {
+        setTimeout(() => {
+          fs.unlink(file.path, (err) => {
+            if (err) {
+              console.log(err)
+              res.status(500)
+            }
 
-          console.log('Deleted file at ' + req.file.path)
-          res.status(200)
-        })
-      }, 10000) // Delete after 10 seconds
+            console.log('Deleted file at ' + file.path)
+            res.status(200)
+          })
+        }, 10000) // Delete after 10 seconds
+      })
     }).finally(() => {
       res.status(200).send(req.file);
     })

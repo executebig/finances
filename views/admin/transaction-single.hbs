@@ -19,7 +19,7 @@
         <form id="receipt" action="/admin/transactions/receipt/{{tx.id}}" method="POST"
             class="dropzone needsclick dz-clickable" enctype="multipart/form-data">
             <div class="dz-message">
-                <button class="dz-button" type="button">Upload Receipt Here (Single File)</button>
+                <button class="dz-button" type="button">Upload Receipt(s) Here</button>
             </div>
             <div class="fallback">
                 <input name="file" type="file" multiple />
@@ -28,7 +28,12 @@
     </div>
 </div>
 
+<script src="/static/assets/js/dropzone.min.js"></script>
 <script>
+    Dropzone.options.receipt = {
+        uploadMultiple: true
+    }
+
     document.querySelectorAll("table tr[changable] td:nth-child(2)").forEach(function (node) {
         node.ondblclick = function () {
             var val = this.innerHTML;
@@ -60,7 +65,3 @@
         }
     });
 </script>
-
-{{#extend "foot-inject"}}
-<script src="/static/assets/js/dropzone.min.js"></script>
-{{/extend}}
