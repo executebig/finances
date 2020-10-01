@@ -2,6 +2,7 @@ const express = require('express')
 const multer = require('multer')
 const mime = require('mime-types')
 const fs = require('fs')
+const upath = require('upath')
 const app = express.Router()
 
 const storage = multer.diskStorage({
@@ -76,7 +77,7 @@ app.post(
     const data = {
       Receipt: req.files.map(file => {
         return {
-          url: config.host + '/' + file.path
+          url: config.host + '/' + upath.normalize(file.path)
         }
       })
     }
