@@ -28,6 +28,16 @@
     </div>
 </div>
 
+<div class="receipts">
+    <h1>Receipts</h1>
+
+    {{#each receipts}}
+    <a href={{this.url}} target="_blank">
+        <img src={{this.thumbnails.large.url}} alt="" />
+    </a>
+    {{/each}}
+</div>
+
 <script src="/static/assets/js/dropzone.min.js"></script>
 <script>
     Dropzone.options.receipt = {

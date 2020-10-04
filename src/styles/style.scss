@@ -257,7 +257,7 @@ h1.site-title {
 
 .transaction-single {
   width: 100%;
-  
+
   tr {
     &[changable] {
       td:first-child {
@@ -270,6 +270,18 @@ h1.site-title {
         color: lightslategray;
       }
     }
+  }
+}
+
+.receipts {
+  h1 {
+    margin-bottom: 8px;
+  }
+
+  img {
+    width: 128px;
+    vertical-align: middle;
+    margin-right: 12px;
   }
 }
 
