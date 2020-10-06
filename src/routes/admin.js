@@ -67,6 +67,7 @@ app.get('/transactions/:id', (req, res) => {
 
 app.post('/transactions/:id', (req, res) => {
   db.updateTx(req.params.id, req.body)
+  db.clearCache()
 })
 
 app.post(
