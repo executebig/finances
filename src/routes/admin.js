@@ -1,12 +1,11 @@
 const express = require('express')
 const multer = require('multer')
 const mime = require('mime-types')
-const fs = require('fs')
 const app = express.Router()
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './static/uploaded')
+    cb(null, './temp/uploaded')
   },
   filename: function (req, file, cb) {
     const uniqueSuffix =
@@ -27,6 +26,7 @@ const account = require('@services/account')
 const db = require('@services/airtable')
 const clog = require('@services/clog')
 const tx = require('@libs/tx')
+const pathStore = require('@libs/pathstore')
 const config = require('@config')
 const { result } = require('lodash')
 
@@ -74,27 +74,17 @@ app.post(
   '/transactions/receipt/:id',
   upload.single('file'),
   (req, res) => {
+    const fullUrl = config.host + '/uploads/' + pathStore.generatePath(req.file.filename)
+
     const data = {
       Receipt: [
         {
-          url: config.host + '/' + req.file.path
+          url: fullUrl
         }
       ]
     }
 
-    db.updateTx(req.params.id, data).then((result) => {
-      setTimeout(() => {
-        fs.unlink(req.file.path, (err) => {
-          if (err) {
-            console.log(err)
-            res.status(500)
-          }
-
-          console.log('Deleted file at ' + req.file.path)
-          res.status(200)
-        })
-      }, 10000) // Delete after 10 seconds
-    }).finally(() => {
+    db.updateTx(req.params.id, data).finally(() => {
       res.status(200).send(req.file);
     })
   }

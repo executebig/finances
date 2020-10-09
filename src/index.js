@@ -75,6 +75,7 @@ app.get("/denied", (req, res) => {
 })
 app.use("/api", require("@routes/api"))
 app.use("/auth", require("@routes/auth"))
+app.use("/uploads", require("@routes/uploads"))
 app.use("/admin", middlewares.isUserAuthenticated , require("@routes/admin"))
 
 server.listen(config.port, () => {

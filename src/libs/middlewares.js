@@ -13,7 +13,6 @@ const logger = (req, res, next) => {
         : null)
 
     console.log(`User at ${req.ip} accessed ${req.originalUrl}`)
-    console.log(JSON.stringify(req.headers));
   }
 
   next()
