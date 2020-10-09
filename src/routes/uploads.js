@@ -7,6 +7,12 @@ const pathStore = require('@libs/pathstore')
 
 app.get('/:path', (req, res) => {
   const realPath = pathStore.getPath(req.params.path)
+
+  if (!realPath) {
+    res.sendStatus(404)
+    return
+  }
+
   const absPath = path.join(
     __dirname,
     '../../temp/uploaded/',

@@ -11,12 +11,14 @@ const generatePath = (fileName) => {
 }
 
 const getPath = (pathName) => {
-    console.log(PATH_DICT)
+  if (PATH_DICT[pathName]) {
     realPath = PATH_DICT[pathName]
-    console.log(realPath)
     delete PATH_DICT[pathName]
 
     return realPath
+  } else {
+    return null
+  }
 }
 
 module.exports = {generatePath, getPath}
