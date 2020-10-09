@@ -1,7 +1,6 @@
 const express = require('express')
 const multer = require('multer')
 const mime = require('mime-types')
-const fs = require('fs')
 const app = express.Router()
 
 const storage = multer.diskStorage({
