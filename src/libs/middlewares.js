@@ -12,9 +12,8 @@ const logger = (req, res, next) => {
         ? req.connection.socket.remoteAddress
         : null)
 
-    console.log(
-      `User at ${req.ip} accessed ${req.originalUrl}`
-    )
+    console.log(`User at ${req.ip} accessed ${req.originalUrl}`)
+    console.log(JSON.stringify(req.headers));
   }
 
   next()
