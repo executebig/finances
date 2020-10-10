@@ -42,6 +42,10 @@ exports.json = (data, options) => {
   return options.fn(JSON.parse(data))
 }
 
+exports.stringify = (json) => {
+  return JSON.stringify(json)
+}
+
 exports.currency = (v) => {
   const thirds = /\B(?=(\d{3})+(?!\d))/g
 
@@ -122,6 +126,15 @@ exports.isLink = (str, options) => {
   return res
     ? options.fn(this)
     : options.inverse(this)
+}
+
+exports.count = (lst) => {
+  return lst.length
+}
+
+exports.moreThanOne = (lst, options) => {
+  return Array.isArray(lst) && lst.length > 1 ? options.fn(this)
+  : options.inverse(this)
 }
 
 const isValidUrl = (url) => {

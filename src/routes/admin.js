@@ -54,10 +54,6 @@ app.get('/transactions', (req, res) => {
 
 app.get('/transactions/:id', (req, res) => {
   db.findTxById(req.params.id).then((d) => {
-    if (d['Receipt']) {
-      d['Receipt'] = d['Receipt'][0]['url']
-    }
-
     res.render('admin/transaction-single', {
       title: `Tx #${d['Tx ID']}`,
       tx: d
