@@ -8,6 +8,7 @@
                 <th>Category</th>
                 <th>Amount</th>
                 {{#if adminOverride}}
+                <th>Receipt</th>
                 <th>Manage</th>
                 {{/if}}
             </tr>
@@ -36,6 +37,21 @@
                 <td class="amount">{{currency txAmount}}</td>
 
                 {{#if ../adminOverride}}
+                <td class="receipt">
+                    {{#if receipt}}
+                        {{#moreThanOne receipt}}
+                            <a href="/admin/transactions/{{../id}}"><span class="dot tx-dot-success"></span>{{count ../receipt}}</a>
+                        {{else}}
+                            <a href="{{../receipt.0.url}}"><span class="dot tx-dot-success"></span>{{count ../receipt}}</a>
+                        {{/moreThanOne}}
+                    {{else}}
+                        {{#ifCond account "!==" "Hack Club Bank"}} 
+                            {{#ifCond ../txAmount "<" 0}}
+                                <span class="dot tx-dot-error"></span>?
+                            {{/ifCond}}
+                        {{/ifCond}}
+                    {{/if}}
+                </td>
                 <td class="manage"><a href="/admin/transactions/{{id}}">Edit</a></td>
                 {{/if}}
             </tr>
@@ -58,10 +74,10 @@
         }
 
         for (i = 0; i < x.length; i++) {
-            x[i].classList.remove("hidden")
-
             if (c !== "all" && !x[i].classList.contains(`tx-${c}`))
-                x[i].classList.add("hidden")
+                fadeOut(x[i])
+            else
+                fadeIn(x[i], 'table-row')
         }
     }
 
@@ -70,4 +86,33 @@
     })
 
     clearButton.addEventListener('click', () => { filterLogs("all") })
+
+    function fadeOut(el) {
+        if (el.style.display !== "none") {
+            el.style.opacity = 1;
+
+            (function fade() {
+                if ((el.style.opacity -= .05) < 0) {
+                    el.style.display = "none";
+                } else {
+                    requestAnimationFrame(fade);
+                }
+            })();
+        }
+    };
+
+    function fadeIn(el, display) {
+        if (el.style.display === "none") {
+            el.style.opacity = 0;
+            el.style.display = display || "block";
+
+            (function fade() {
+                var val = parseFloat(el.style.opacity);
+                if (!((val += .05) > 1)) {
+                    el.style.opacity = val;
+                    requestAnimationFrame(fade);
+                }
+            })();
+        }
+    };
 </script>

@@ -228,6 +228,18 @@ h1.site-title {
       display: inline-block;
       margin-right: 10px;
 
+      &.tx-dot-success {
+        background-color: #5cb85c;
+      }
+
+      &.tx-dot-na {
+        background-color: lightgray;
+      }
+
+      &.tx-dot-error {
+        background-color: #cc0f35;
+      }
+
       &.tx-dot-travel-grant {
         background-color: $primary;
       }
@@ -257,7 +269,7 @@ h1.site-title {
 
 .transaction-single {
   width: 100%;
-  
+
   tr {
     &[changable] {
       td:first-child {
