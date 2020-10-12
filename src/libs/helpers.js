@@ -121,6 +121,10 @@ exports.changeable = (key, options) => {
 }
 
 exports.isLink = (str, options) => {
+  if (str === undefined) {
+    return options.inverse(this)
+  }
+
   const res = str.toString().includes("://") && isValidUrl(str)
 
   return res
@@ -135,6 +139,10 @@ exports.count = (lst) => {
 exports.moreThanOne = (lst, options) => {
   return Array.isArray(lst) && lst.length > 1 ? options.fn(this)
   : options.inverse(this)
+}
+
+exports.isArray = (lst, options) => {
+  return Array.isArray(lst) ? options.fn(this) : options.inverse(this)
 }
 
 const isValidUrl = (url) => {
