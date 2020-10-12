@@ -113,7 +113,7 @@ exports.not = (bool) => {
 }
 
 exports.changeable = (key, options) => {
-  const CHANGEABLE_FIELDS = ['Category', 'Tx Display Name']
+  const CHANGEABLE_FIELDS = ['Category', 'Tx Display Name', 'Redacted']
 
   return CHANGEABLE_FIELDS.includes(key)
     ? options.fn(this)
