@@ -98,6 +98,7 @@ const findTxById = async (id) => {
   let row = await airtable.find(id)
   row.fields.id = row.id
   row.fields.hash = hashify(row.id)
+  row.fields['Redacted'] = Boolean(row.fields['Redacted'])
   row = row.fields
 
   return row

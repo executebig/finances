@@ -12,10 +12,10 @@
                     <td data-key="{{@key}}" data-id="{{../tx.id}}">
                         {{#isArray this}}
                             {{#each ../this}}
-                                {{#isLink url}}<a href="{{../url}}" target="_blank">Link »</a>{{else}}{{this}}{{/isLink}}<br />
+                                {{#isLink url}}<a href="{{../url}}" target="_blank">Link »</a>{{else}}{{this}}{{/isLink}}
                             {{/each}}
                         {{else}}
-                            {{#isLink url}}<a href="{{../url}}" target="_blank">Link »</a>{{else}}{{../this}}{{/isLink}}<br />
+                            {{#isLink url}}<a href="{{../url}}" target="_blank">Link »</a>{{else}}{{../this}}{{/isLink}}
                         {{/isArray}}
                     </td>
                 </tr>
