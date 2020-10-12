@@ -10,13 +10,13 @@
                 <tr {{#changeable @key}}changable{{/changeable}}>
                     <td>{{@key}}</td>
                     <td data-key="{{@key}}" data-id="{{../tx.id}}">
-                    {{#moreThanOne this}}
-                        {{#each ../this}}
+                        {{#isArray this}}
+                            {{#each ../this}}
+                                {{#isLink url}}<a href="{{../url}}" target="_blank">Link »</a>{{else}}{{this}}{{/isLink}}<br />
+                            {{/each}}
+                        {{else}}
                             {{#isLink url}}<a href="{{../url}}" target="_blank">Link »</a>{{else}}{{../this}}{{/isLink}}<br />
-                        {{/each}}
-                    {{else}}
-                        {{#isLink ../this}}<a href="{{../this}}" target="_blank">Link »</a>{{else}}{{../this}}{{/isLink}}
-                    {{/moreThanOne}}
+                        {{/isArray}}
                     </td>
                 </tr>
                 {{/each}}
