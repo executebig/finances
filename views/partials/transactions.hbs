@@ -47,7 +47,9 @@
                     {{else}}
                         {{#ifCond account "!==" "Hack Club Bank"}} 
                             {{#ifCond ../txAmount "<" 0}}
-                                <span class="dot tx-dot-error"></span>?
+                                {{#ifCond ../category "!=" "Internal Transfer"}}
+                                    <span class="dot tx-dot-error"></span>?
+                                {{/ifCond}}
                             {{/ifCond}}
                         {{/ifCond}}
                     {{/if}}
