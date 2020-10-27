@@ -56,13 +56,13 @@ const curMonthExp = (txs) => {
         const txMonth = Number(txDate[1])
 
         if (txYear === year && txMonth === month) {
-            if (txs[i] < 0 && txs[i].category !== "Internal Transfer") {
+            if (txs[i].txAmount < 0 && txs[i].category !== "Internal Transfer") {
                 sum += parseFloat(txs[i].txAmount)
             }
         }
     }
 
-    return sum
+    return Math.abs(sum)
 }
 
 module.exports = { sum, curMonthRev, curMonthExp }
