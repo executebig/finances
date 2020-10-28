@@ -9,7 +9,9 @@
 const sum = (txs) => {
     let sum = 0
     for (let i in txs) {
-        sum += parseFloat(txs[i].txAmount)
+        if (txs[i].account !== "Hack Club Bank") {
+            sum += parseFloat(txs[i].txAmount)
+        }
     }
     return sum
 }
