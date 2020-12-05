@@ -1,5 +1,4 @@
-const express = require("express")
-const app = express.Router()
+const app = require("express").Router()
 
 const passport = require("@services/passport")
 
@@ -11,6 +10,11 @@ app.get(
         scope: ['profile', 'email'] // Used to specify the required data
     })
 )
+
+
+app.get('/denied', (req, res) => {
+    res.render('denied', { title: 'Access Denied' })
+})
 
 app.get('/callback', passport.authenticate('google'), (req, res) => {
     res.redirect('/admin')

@@ -3,11 +3,12 @@ require('module-alias/register')
 const express = require('express')
 const exphbs = require('express-handlebars')
 const path = require("path")
-const cookieSession = require('cookie-session')
 const minifyHTML = require('express-minify-html')
 const compression = require('compression')
 const sassMiddleware = require('node-sass-middleware')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const expressSession = require('express-session')
 const cors = require('cors')
 
 const config = require('@config')
@@ -52,11 +53,14 @@ app.use(
 )
 
 app.use(middlewares.logger)
-
+app.use(cookieParser())
 app.use(
-  cookieSession({
-    maxAge: 24 * 60 * 60 * 1000,
-    keys: [config.sessionKey]
+  expressSession({
+    secret: config.sessionKey,
+    cookie: {
+      expires: false,
+      resave: false
+    }
   })
 )
 app.use(passport.initialize())
