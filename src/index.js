@@ -17,7 +17,6 @@ const middlewares = require('@libs/middlewares')
 const helpers = require('@libs/helpers')
 const passport = require("@services/passport")
 const clog = require("@services/clog")
-const tx = require("@libs/tx")
 
 const app = express()
 const hbs = exphbs.create({ helpers: helpers, extname: '.hbs' })
@@ -57,10 +56,8 @@ app.use(cookieParser())
 app.use(
   expressSession({
     secret: config.sessionKey,
-    cookie: {
-      expires: false,
-      resave: false
-    }
+    resave: false,
+    saveUninitialized: false
   })
 )
 app.use(passport.initialize())
