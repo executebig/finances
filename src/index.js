@@ -57,7 +57,10 @@ app.use(
   expressSession({
     secret: config.sessionKey,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+      expires: false
+    }
   })
 )
 app.use(passport.initialize())
