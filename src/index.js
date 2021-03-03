@@ -80,7 +80,7 @@ app.get('/', (req, res) => {
     .getTx()
     .then((d) => {
       res.render('landing', {
-        title: 'Transparent Finances',
+        title: 'a',
         txs: d,
         balance: TX.sum(d),
         donation: TX.curMonthRev(d),
@@ -105,7 +105,7 @@ app.get('/category/:category', (req, res) => {
       )
 
       res.render('landing', {
-        title: 'Finances',
+        title: 'Transparent Finances',
         filtered: true,
         txs: filtered_data,
         balance: TX.sum(filtered_data),
