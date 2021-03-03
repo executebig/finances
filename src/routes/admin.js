@@ -24,8 +24,7 @@ const upload = multer({ storage: storage })
 
 const account = require('@services/account')
 const db = require('@services/airtable')
-const clog = require('@services/clog')
-const tx = require('@libs/tx')
+const TX = require('@libs/tx')
 const pathStore = require('@libs/pathstore')
 const config = require('@config')
 const { result } = require('lodash')
@@ -47,7 +46,10 @@ app.get('/transactions', (req, res) => {
   db.getTx({ showAll: true }).then((d) => {
     res.render('admin/transactions', {
       title: 'Transactions',
-      txs: d
+      txs: d,
+      balance: TX.sum(d),
+      donation: TX.curMonthRev(d),
+      expenditure: TX.curMonthExp(d)
     })
   })
 })
