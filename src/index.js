@@ -80,7 +80,7 @@ app.get('/', (req, res) => {
     .getTx()
     .then((d) => {
       res.render('landing', {
-        title: 'a',
+        title: 'Transparent Finances',
         txs: d,
         balance: TX.sum(d),
         donation: TX.curMonthRev(d),
