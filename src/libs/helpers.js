@@ -51,7 +51,7 @@ exports.currency = (v) => {
 
   return v >= 0
     ? '$' + v.toFixed(2).replace(thirds, ',')
-    : '-$' + Math.abs(v).toFixed(2).replace(thirds, ',')
+    : '$' + Math.abs(v).toFixed(2).replace(thirds, ',')
 }
 
 exports.ifCond = (v1, operator, v2, options) => {

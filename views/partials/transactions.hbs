@@ -15,7 +15,7 @@
         </thead>
         <tbody>
             {{#each txs}}
-            <tr class="tx tx-{{slugify category}} {{#ifCond txAmount "<" 0}}tx-negative{{else}}tx-positive{{/ifCond}}">
+            <tr class="tx tx-{{slugify category}}">
                 <td class="txDate">
                     {{txDate}}
                 </td>
@@ -34,7 +34,7 @@
                 <td class="tx-category category-selector" data-filter="{{slugify category}}"><span
                             class="dot tx-dot-{{slugify category}}"></span><span>{{category}}</span></td>
 
-                <td class="amount">{{currency txAmount}}</td>
+                <td class="amount {{#ifCond txAmount "<" 0}}amount-negative{{else}}amount-positive{{/ifCond}}">{{currency txAmount}}</td>
 
                 {{#if ../adminOverride}}
                 <td class="receipt">
