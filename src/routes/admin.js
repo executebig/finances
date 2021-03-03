@@ -1,26 +1,5 @@
 const express = require('express')
-const multer = require('multer')
-const mime = require('mime-types')
 const app = express.Router()
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './temp/uploaded')
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix =
-      Date.now() + '-' + Math.round(Math.random() * 1e9)
-    cb(
-      null,
-      req.params.id +
-        '-' +
-        uniqueSuffix +
-        '.' +
-        mime.extension(file.mimetype)
-    )
-  }
-})
-const upload = multer({ storage: storage })
 
 const account = require('@services/account')
 const db = require('@services/airtable')
@@ -68,25 +47,23 @@ app.post('/transactions/:id', (req, res) => {
   db.clearCache()
 })
 
-app.post(
-  '/transactions/receipt/:id',
-  upload.single('file'),
-  (req, res) => {
-    const fullUrl = config.host + '/uploads/' + pathStore.generatePath(req.file.filename)
+app.post('/transactions/receipt/:id', (req, res) => {
+  const fileUrl = req.body.receipt
 
-    const data = {
-      Receipt: [
-        {
-          url: fullUrl
-        }
-      ]
-    }
+  console.log(fileUrl)
 
-    db.updateTx(req.params.id, data).finally(() => {
-      res.status(200).send(req.file);
-    })
+  const data = {
+    Receipt: [
+      {
+        url: fileUrl
+      }
+    ]
   }
-)
+
+  db.updateTx(req.params.id, data).finally(() => {
+    res.status(200)
+  })
+})
 
 // list accounts
 app.get('/sync', async (req, res) => {
