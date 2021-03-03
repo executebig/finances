@@ -23,9 +23,12 @@
     </div>
     {{#ifCond (lookup tx "Tx Amount") "<" 0}}
         <div class="column is-one-third-desktop">
-            <iframe width="100%" height="100%" src="https://pan.executebig.org/e?count=1" id="sheet">
+            <iframe width="100%" height="100%" id="sheet">
                 You must enable JavaScript and allow iFrames to upload your data sheet.
             </iframe>
+            <script>
+                document.getElementById("sheet").setAttribute("src", "https://pan.executebig.org/e?count=1&origin=" + window.location.origin)
+            </script>
         </div>
     {{/ifCond}}
 </div>
@@ -67,7 +70,7 @@
 
     window.addEventListener("message", (e) => {
         console.log(e.data.url)
-        fetch(`/admin/transactions/receipt/{{../tx.id}}`, {
+        fetch(`/admin/transactions/receipt/{{tx.id}}`, {
             method: 'POST', headers: {
                 'Content-Type': 'application/json',
             },

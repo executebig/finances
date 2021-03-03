@@ -45,19 +45,15 @@ app.post('/transactions/:id', (req, res) => {
 })
 
 app.post('/transactions/receipt/:id', (req, res) => {
-  const fileUrl = req.body.receipt
-
-  console.log(fileUrl)
-
   const data = {
     Receipt: [
       {
-        url: fileUrl
+        url: req.body.receipt
       }
     ]
   }
 
-  db.updateTx(req.params.id, data).finally(() => {
+  db.updateTx(req.params.id, data).then(() => {
     res.status(200)
   })
 })
