@@ -4,9 +4,6 @@ const app = express.Router()
 const account = require('@services/account')
 const db = require('@services/airtable')
 const TX = require('@libs/tx')
-const pathStore = require('@libs/pathstore')
-const config = require('@config')
-const { result } = require('lodash')
 
 app.use(async (req, res, next) => {
   res.locals.layout = 'admin'
