@@ -34,7 +34,7 @@ body {
 }
 
 h1.site-title {
-  color: $primary;
+  color: #2f2f41;
 }
 
 .hero {
@@ -254,6 +254,10 @@ h1.site-title {
 
       &.tx-dot-administrative {
         background-color: $dark;
+      }
+
+      &.tx-dot-fellowship {
+        background-color: #34d1bf;
       }
 
       &.tx-dot-marketing {
