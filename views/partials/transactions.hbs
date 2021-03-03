@@ -5,7 +5,9 @@
             <tr>
                 <th>Date</th>
                 <th>Description</th>
+                {{#unless filtered}}
                 <th>Category</th>
+                {{/unless}}
                 <th>Amount</th>
                 {{#if adminOverride}}
                 <th>Receipt</th>
@@ -31,8 +33,10 @@
                     {{/ifCond}}
                 </td>
 
-                <td class="tx-category category-selector" data-filter="{{slugify category}}"><span
-                            class="dot tx-dot-{{slugify category}}"></span><span>{{category}}</span></td>
+                {{#unless ../filtered}}
+                <td class="tx-category category-selector"><a href="/category/{{slugify category}}"><span
+                            class="dot tx-dot-{{slugify category}}"></span><span>{{category}}</span></a></td>
+                {{/unless}}
 
                 <td class="amount {{#ifCond txAmount "<" 0}}amount-negative{{else}}amount-positive{{/ifCond}}">{{currency txAmount}}</td>
 
@@ -61,60 +65,3 @@
         </tbody>
     </table>
 </div>
-
-<script>
-    const clearButton = document.getElementById("clear-filter")
-
-    function filterLogs(c) {
-        let x, i;
-        x = document.querySelectorAll("tr.tx");
-
-        if (c === "all") {
-            clearButton.classList.remove("active")
-        } else {
-            clearButton.classList.add("active")
-        }
-
-        for (i = 0; i < x.length; i++) {
-            if (c !== "all" && !x[i].classList.contains(`tx-${c}`))
-                fadeOut(x[i])
-            else
-                fadeIn(x[i], 'table-row')
-        }
-    }
-
-    document.querySelectorAll('.category-selector').forEach((el) => {
-        el.addEventListener('click', () => { filterLogs(el.dataset.filter) })
-    })
-
-    clearButton.addEventListener('click', () => { filterLogs("all") })
-
-    function fadeOut(el) {
-        if (el.style.display !== "none") {
-            el.style.opacity = 1;
-
-            (function fade() {
-                if ((el.style.opacity -= .05) < 0) {
-                    el.style.display = "none";
-                } else {
-                    requestAnimationFrame(fade);
-                }
-            })();
-        }
-    };
-
-    function fadeIn(el, display) {
-        if (el.style.display === "none") {
-            el.style.opacity = 0;
-            el.style.display = display || "block";
-
-            (function fade() {
-                var val = parseFloat(el.style.opacity);
-                if (!((val += .05) > 1)) {
-                    el.style.opacity = val;
-                    requestAnimationFrame(fade);
-                }
-            })();
-        }
-    };
-</script>

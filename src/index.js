@@ -2,7 +2,7 @@ require('module-alias/register')
 
 const express = require('express')
 const exphbs = require('express-handlebars')
-const path = require("path")
+const path = require('path')
 const minifyHTML = require('express-minify-html')
 const compression = require('compression')
 const sassMiddleware = require('node-sass-middleware')
@@ -15,12 +15,16 @@ const config = require('@config')
 
 const middlewares = require('@libs/middlewares')
 const helpers = require('@libs/helpers')
-const passport = require("@services/passport")
-const clog = require("@services/clog")
+const TX = require('@libs/tx')
+const passport = require('@services/passport')
+const clog = require('@services/clog')
 
 const app = express()
-const hbs = exphbs.create({ helpers: helpers, extname: '.hbs' })
-const server = require('http').createServer(app);
+const hbs = exphbs.create({
+  helpers: helpers,
+  extname: '.hbs'
+})
+const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
 app.use(cors())
@@ -66,24 +70,65 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session()) // Persistent Sessions
 
-app.use('/static', express.static(path.join(__dirname, '../static')))
+app.use(
+  '/static',
+  express.static(path.join(__dirname, '../static'))
+)
 
 app.get('/', (req, res) => {
-  require('@services/airtable').getTx().then((d) => {
-    res.render('landing', { title: 'Finances', txs: d })
-  })
+  require('@services/airtable')
+    .getTx()
+    .then((d) => {
+      res.render('landing', {
+        title: 'Finances',
+        txs: d,
+        balance: TX.sum(d),
+        donation: TX.curMonthRev(d),
+        expenditure: TX.curMonthExp(d)
+      })
+    })
 })
 
-app.get("/denied", (req, res) => {
-  res.render("denied", {title: "Access Denied"})
+app.get('/category/:category', (req, res) => {
+  const category = req.params.category.toLowerCase()
+  const slugify = (str) =>
+    str
+      .toLowerCase()
+      .replace(/ /g, '-')
+      .replace(/[^\w-]+/g, '')
+
+  require('@services/airtable')
+    .getTx()
+    .then((d) => {
+      let filtered_data = d.filter(
+        (tx) => slugify(tx.category) === category
+      )
+
+      res.render('landing', {
+        title: 'Finances',
+        filtered: true,
+        txs: filtered_data,
+        balance: TX.sum(filtered_data),
+        donation: TX.sumRev(filtered_data),
+        expenditure: TX.sumExp(filtered_data)
+      })
+    })
 })
-app.use("/api", require("@routes/api"))
-app.use("/auth", require("@routes/auth"))
-app.use("/uploads", require("@routes/uploads"))
-app.use("/admin", middlewares.isUserAuthenticated , require("@routes/admin"))
+
+app.get('/denied', (req, res) => {
+  res.render('denied', { title: 'Access Denied' })
+})
+app.use('/api', require('@routes/api'))
+app.use('/auth', require('@routes/auth'))
+app.use('/uploads', require('@routes/uploads'))
+app.use(
+  '/admin',
+  middlewares.isUserAuthenticated,
+  require('@routes/admin')
+)
 
 server.listen(config.port, () => {
   console.log(`Server started at ${config.host}`)
-});
+})
 
 clog.start(io)

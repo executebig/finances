@@ -43,6 +43,38 @@ const curMonthRev = (txs) => {
 }
 
 /**
+ * Returns the total amount of income 
+ * @param {Array} txs Transaction table
+ */
+const sumRev = (txs) => {
+    let sum = 0
+    for (let i in txs) {
+        let amount = parseFloat(txs[i].txAmount)
+
+        if (amount > 0) {
+            sum += amount
+        }
+    }
+    return sum
+}
+
+/**
+ * Returns the total amount of expense 
+ * @param {Array} txs Transaction table
+ */
+const sumExp = (txs) => {
+    let sum = 0
+    for (let i in txs) {
+        let amount = parseFloat(txs[i].txAmount)
+
+        if (amount < 0) {
+            sum += amount
+        }
+    }
+    return sum
+}
+
+/**
  * Returns the total amount of funds spent this month
  * @param {Array} txs Transaction table
  */
@@ -67,4 +99,4 @@ const curMonthExp = (txs) => {
     return Math.abs(sum)
 }
 
-module.exports = { sum, curMonthRev, curMonthExp }
+module.exports = { sum, curMonthRev, curMonthExp, sumRev, sumExp }
