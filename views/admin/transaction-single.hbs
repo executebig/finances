@@ -77,7 +77,7 @@
             body: JSON.stringify({
                 receipt: e.data.url
             })
-        }).then((res) => {
+        }).then(data => {
             window.location.reload()
         })
     }, false);

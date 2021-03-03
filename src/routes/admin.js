@@ -53,8 +53,9 @@ app.post('/transactions/receipt/:id', (req, res) => {
     ]
   }
 
-  db.updateTx(req.params.id, data).then(() => {
-    res.status(200)
+  let update = db.updateTx(req.params.id, data)
+  update.then(() => {
+    res.status(200).json({success: true})
   })
 })
 
