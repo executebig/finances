@@ -10,6 +10,7 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
 const cors = require('cors')
+const cron = require('cron').CronJob
 
 const config = require('@config')
 
@@ -131,3 +132,26 @@ server.listen(config.port, () => {
 })
 
 clog.start(io)
+
+/** Synchronize all transactions @ 2am Eastern Time Every Day */
+
+let dailySync = new cron(
+  '0 0 2 * * *',
+  () => {
+    console.log('Executing daily sync...')
+
+    const account = require('@services/account')
+    account.getAccounts().then((allAccounts) => {
+      allAccounts.forEach((acc) => {
+        account.syncAccount(acc.id)
+      })
+    }).finally(() => {
+      console.log('Daily sync complete!')
+    })
+  },
+  null,
+  true,
+  'America/New_York'
+)
+
+dailySync.start()
