@@ -379,4 +379,18 @@ a.button {
   }
 }
 
+.footnote {
+  hr {
+    width: 50px;
+    background-color: #dbdbdb;
+    margin-bottom: .5rem;
+    height: 1px;
+  }
+
+  p {
+    font-size: .8rem;
+    margin-bottom: 5px;
+  }
+}
+
 @import '../../node_modules/bulma/bulma.sass';
