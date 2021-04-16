@@ -1,9 +1,9 @@
 <a href="https://finances.executebig.org/">
-<p align="center"><img width="100px" height="100px" alt="Hack Club icon" src="static/assets/icon.png"></p>
-<h1 align="center"><strong>Goblin/Finances</strong></h1>
+<p align="center"><img width="100px" height="100px" alt="Finances icon" src="static/assets/icon.png"></p>
+<h1 align="center"><strong>Finances</strong></h1>
 </a>
 
-Goblin is [Execute Big](https://executebig.org)'s handler for accessing finance-related information. It is a part of our commitment to achieve 100% financial transparency.
+Finances is [Execute Big](https://executebig.org)'s handler for accessing finance-related information. It is a part of our commitment to achieve 100% financial transparency.
 
 Execute Big runs on [Mercury](https://mercury.com). This service interacts with the [Mercury API](https://mercury.com/api). Data is stored on [Airtable](https://airtable.com).
 

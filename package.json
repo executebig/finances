@@ -1,9 +1,9 @@
 {
-  "name": "goblin",
-  "version": "1.0.0",
+  "name": "finances",
+  "version": "2.0.1",
   "description": "Execute Big's microservice to handle financial data.",
   "main": "./src/index.js",
-  "repository": "https://github.com/executebig/goblin",
+  "repository": "https://github.com/executebig/finances",
   "author": "Mingjie Jiang <jiang@mingjie.dev>",
   "license": "MIT",
   "private": true,
