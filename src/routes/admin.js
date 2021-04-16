@@ -19,15 +19,30 @@ app.get('/', (req, res) => {
 })
 
 app.get('/transactions', (req, res) => {
-  db.getTx({ showAll: true }).then((d) => {
-    res.render('admin/transactions', {
-      title: 'Transactions',
-      txs: d,
-      balance: TX.sum(d),
-      donation: TX.curMonthRev(d),
-      expenditure: TX.curMonthExp(d)
+  const page = req.query.page ? Number(req.query.page) : 1
+  const pageSize = 25
+
+  require('@services/airtable')
+    .getTx({ showAll: true })
+    .then((d) => {
+      const totalPages = Math.ceil(d.length / pageSize)
+
+      if (page > Math.ceil(d.length / pageSize)) {
+        res.render('denied', { title: 'Access Denied' })
+      } else {
+        let pageData = d.slice((page - 1) * pageSize, page * pageSize)
+
+        res.render('admin/transactions', {
+          title: 'Transactions',
+          txs: pageData,
+          balance: TX.sum(d),
+          donation: TX.curMonthRev(d),
+          expenditure: TX.curMonthExp(d),
+          nextPage: page + 1 <= totalPages ? page + 1 : -1,
+          prevPage: page - 1 >= 1 ? page - 1 : -1
+        })
+      }
     })
-  })
 })
 
 app.get('/transactions/:id', (req, res) => {
@@ -55,7 +70,7 @@ app.post('/transactions/receipt/:id', (req, res) => {
 
   let update = db.updateTx(req.params.id, data)
   update.then(() => {
-    res.status(200).json({success: true})
+    res.status(200).json({ success: true })
   })
 })
 

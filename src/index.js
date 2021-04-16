@@ -77,16 +77,29 @@ app.use(
 )
 
 app.get('/', (req, res) => {
+  const page = req.query.page ? Number(req.query.page) : 1
+  const pageSize = 25
+
   require('@services/airtable')
     .getTx()
     .then((d) => {
-      res.render('landing', {
-        title: 'Transparent Finances',
-        txs: d,
-        balance: TX.sum(d),
-        donation: TX.curMonthRev(d),
-        expenditure: TX.curMonthExp(d)
-      })
+      const totalPages = Math.ceil(d.length / pageSize)
+
+      if (page > Math.ceil(d.length / pageSize)) {
+        res.render('denied', { title: 'Access Denied' })
+      } else {
+        let pageData = d.slice((page - 1) * pageSize, page * pageSize)
+
+        res.render('landing', {
+          title: 'Transparent Finances',
+          txs: pageData,
+          balance: TX.sum(d),
+          donation: TX.curMonthRev(d),
+          expenditure: TX.curMonthExp(d),
+          nextPage: page + 1 <= totalPages ? page + 1 : -1,
+          prevPage: page - 1 >= 1 ? page - 1 : -1
+        })
+      }
     })
 })
 
@@ -111,7 +124,8 @@ app.get('/category/:category', (req, res) => {
         txs: filtered_data,
         balance: TX.sum(filtered_data),
         donation: TX.sumRev(filtered_data),
-        expenditure: TX.sumExp(filtered_data)
+        expenditure: TX.sumExp(filtered_data),
+        noPagination: true
       })
     })
 })
