@@ -35,7 +35,7 @@
                     {{#unless ../filtered}}
                         <td class="tx-category category-selector"><a href="/category/{{slugify category}}"><span class="dot tx-dot-{{slugify category}}"></span><span>{{category}}</span></a></td>
                     {{/unless}}
-                    <td class="amount {{#ifCond txAmount " <" 0}}amount-negative{{else}}amount-positive{{/ifCond}}">{{currency txAmount}}</td>
+                    <td class="amount {{#ifCond txAmount "<" 0}}amount-negative{{else}}amount-positive{{/ifCond}}">{{currency txAmount}}</td>
                     {{#if ../adminOverride}}
                         <td class="receipt">
                             {{#if receipt}}
