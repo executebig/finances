@@ -2,7 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   airtable-plus: 1.0.4
-  body-parser: ^1.19.0
+  body-parser: 1.19.0
   bulma: 0.9.3
   compression: 1.7.4
   cookie-parser: 1.4.5
@@ -2017,7 +2017,7 @@ packages:
     engines: {node: '>= 0.6'}
     dependencies:
       media-typer: 0.3.0
-      mime-types: 2.1.30
+      mime-types: 2.1.32
     dev: false
 
   /uglify-js/3.14.1:
