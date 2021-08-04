@@ -95,7 +95,7 @@ app.get('/', (req, res) => {
           txs: pageData,
           balance: TX.sum(d),
           donation: TX.curMonthRev(d),
-          expenditure: TX.curMonthExp(d),
+          expense: TX.curMonthExp(d),
           nextPage: page + 1 <= totalPages ? page + 1 : -1,
           prevPage: page - 1 >= 1 ? page - 1 : -1
         })
@@ -124,7 +124,7 @@ app.get('/category/:category', (req, res) => {
         txs: filtered_data,
         balance: TX.sum(filtered_data),
         donation: TX.sumRev(filtered_data),
-        expenditure: TX.sumExp(filtered_data),
+        expense: TX.sumExp(filtered_data),
         noPagination: true
       })
     })

@@ -37,7 +37,7 @@ app.get('/transactions', (req, res) => {
           txs: pageData,
           balance: TX.sum(d),
           donation: TX.curMonthRev(d),
-          expenditure: TX.curMonthExp(d),
+          expense: TX.curMonthExp(d),
           nextPage: page + 1 <= totalPages ? page + 1 : -1,
           prevPage: page - 1 >= 1 ? page - 1 : -1
         })
