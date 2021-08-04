@@ -119,7 +119,7 @@ app.get('/category/:category', (req, res) => {
       )
 
       res.render('landing', {
-        title: 'Transparent Finances',
+        title: 'Transaction Logs: #' + category,
         filtered: true,
         txs: filtered_data,
         balance: TX.sum(filtered_data),

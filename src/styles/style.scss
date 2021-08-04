@@ -2,7 +2,7 @@ $colors: null;
 
 @import '../../node_modules/bulma/sass/utilities/_all';
 
-$primary: #266dd3;
+$primary: #4772ff;
 $secondary: #dd6e42;
 $dark: #2f2f41;
 
@@ -40,6 +40,10 @@ body {
   img {
     margin-bottom: 1rem;
     width: 8rem;
+  }
+
+  h1.title {
+    color: $primary;
   }
 }
 
@@ -270,6 +274,10 @@ body {
 
       &.tx-dot-donation {
         background-color: $secondary;
+      }
+
+      &.tx-dot-tech-roulette {
+        background-color: $primary;
       }
 
       &.tx-dot-internal-transfer {
