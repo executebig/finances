@@ -18,7 +18,7 @@
     "cron": "1.8.2",
     "dotenv": "10.0.0",
     "express": "4.17.1",
-    "express-handlebars": "5.3.2",
+    "express-handlebars": "5.3.5",
     "express-minify-html": "0.12.0",
     "express-session": "1.17.2",
     "handlebars-dateformat": "1.1.1",
