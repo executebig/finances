@@ -5,7 +5,7 @@ specifiers:
   body-parser: 1.19.0
   bulma: 0.9.3
   compression: 1.7.4
-  cookie-parser: 1.4.5
+  cookie-parser: 1.4.6
   cookie-session: 1.4.0
   cors: 2.8.5
   cron: 1.8.2
@@ -30,7 +30,7 @@ dependencies:
   body-parser: 1.19.0
   bulma: 0.9.3
   compression: 1.7.4
-  cookie-parser: 1.4.5
+  cookie-parser: 1.4.6
   cookie-session: 1.4.0
   cors: 2.8.5
   cron: 1.8.2
@@ -383,11 +383,11 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
-  /cookie-parser/1.4.5:
-    resolution: {integrity: sha512-f13bPUj/gG/5mDr+xLmSxxDsB9DQiTIfhJS/sqjrmfAWiAN+x2O4i/XguTL9yDZ+/IFDanJ+5x7hC4CXT9Tdzw==}
+  /cookie-parser/1.4.6:
+    resolution: {integrity: sha512-z3IzaNjdwUC2olLIB5/ITd0/setiaFMLYiZJle7xg5Fe9KWAceil7xszYfHHBtDFYLSgJduS2Ty0P1uJdPDJeA==}
     engines: {node: '>= 0.8.0'}
     dependencies:
-      cookie: 0.4.0
+      cookie: 0.4.1
       cookie-signature: 1.0.6
     dev: false
 
@@ -2024,6 +2024,7 @@ packages:
     resolution: {integrity: sha512-JhS3hmcVaXlp/xSo3PKY5R0JqKs5M3IV+exdLHW99qKvKivPO4Z8qbej6mte17SOPqAOVMjt/XGgWacnFSzM3g==}
     engines: {node: '>=0.8.0'}
     hasBin: true
+    requiresBuild: true
     dev: false
     optional: true
 
