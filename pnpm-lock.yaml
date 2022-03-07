@@ -19,7 +19,7 @@ specifiers:
   lodash.merge: 4.6.2
   mime-types: 2.1.32
   module-alias: 2.2.2
-  node-fetch: 2.6.2
+  node-fetch: 2.6.7
   node-sass-middleware: 0.11.0
   passport: 0.4.1
   passport-google-oauth: 2.0.0
@@ -44,7 +44,7 @@ dependencies:
   lodash.merge: 4.6.2
   mime-types: 2.1.32
   module-alias: 2.2.2
-  node-fetch: 2.6.2
+  node-fetch: 2.6.7
   node-sass-middleware: 0.11.0
   passport: 0.4.1
   passport-google-oauth: 2.0.0
@@ -1230,9 +1230,16 @@ packages:
       lower-case: 1.1.4
     dev: false
 
-  /node-fetch/2.6.2:
-    resolution: {integrity: sha512-aLoxToI6RfZ+0NOjmWAgn9+LEd30YCkJKFSyWacNZdEKTit/ZMcKjGkTRo8uWEsnIb/hfKecNPEbln02PdWbcA==}
+  /node-fetch/2.6.7:
+    resolution: {integrity: sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==}
     engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
+    dependencies:
+      whatwg-url: 5.0.0
     dev: false
 
   /node-gyp/3.8.0:
@@ -1986,6 +1993,10 @@ packages:
       punycode: 2.1.1
     dev: false
 
+  /tr46/0.0.3:
+    resolution: {integrity: sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=}
+    dev: false
+
   /trim-newlines/1.0.0:
     resolution: {integrity: sha1-WIeWa7WCpFA6QetST301ARgVphM=}
     engines: {node: '>=0.10.0'}
@@ -2024,6 +2035,7 @@ packages:
     resolution: {integrity: sha512-JhS3hmcVaXlp/xSo3PKY5R0JqKs5M3IV+exdLHW99qKvKivPO4Z8qbej6mte17SOPqAOVMjt/XGgWacnFSzM3g==}
     engines: {node: '>=0.8.0'}
     hasBin: true
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -2096,6 +2108,17 @@ packages:
       assert-plus: 1.0.0
       core-util-is: 1.0.2
       extsprintf: 1.3.0
+    dev: false
+
+  /webidl-conversions/3.0.1:
+    resolution: {integrity: sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE=}
+    dev: false
+
+  /whatwg-url/5.0.0:
+    resolution: {integrity: sha1-lmRU6HZUYuN2RNNib2dCzotwll0=}
+    dependencies:
+      tr46: 0.0.3
+      webidl-conversions: 3.0.1
     dev: false
 
   /which-module/2.0.0:
