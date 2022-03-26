@@ -24,7 +24,7 @@
     "handlebars-dateformat": "1.1.1",
     "lodash": "4.17.21",
     "lodash.merge": "4.6.2",
-    "mime-types": "2.1.32",
+    "mime-types": "2.1.35",
     "module-alias": "2.2.2",
     "node-fetch": "2.6.2",
     "node-sass-middleware": "0.11.0",
