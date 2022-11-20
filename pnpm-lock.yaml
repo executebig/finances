@@ -14,7 +14,7 @@ specifiers:
   express-handlebars: 5.3.2
   express-minify-html: 0.12.0
   express-session: 1.17.2
-  handlebars-dateformat: 1.1.1
+  handlebars-dateformat: 1.1.3
   lodash: 4.17.21
   lodash.merge: 4.6.2
   mime-types: 2.1.32
@@ -39,7 +39,7 @@ dependencies:
   express-handlebars: 5.3.2
   express-minify-html: 0.12.0
   express-session: 1.17.2
-  handlebars-dateformat: 1.1.1
+  handlebars-dateformat: 1.1.3
   lodash: 4.17.21
   lodash.merge: 4.6.2
   mime-types: 2.1.32
@@ -226,6 +226,8 @@ packages:
       qs: 6.7.0
       raw-body: 2.4.0
       type-is: 1.6.18
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /brace-expansion/1.1.11:
@@ -361,6 +363,8 @@ packages:
       on-headers: 1.0.2
       safe-buffer: 5.1.2
       vary: 1.1.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /concat-map/0.0.1:
@@ -397,6 +401,8 @@ packages:
       cookies: 0.8.0
       debug: 2.6.9
       on-headers: 1.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /cookie-signature/1.0.6:
@@ -462,6 +468,11 @@ packages:
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.0.0
     dev: false
@@ -607,6 +618,8 @@ packages:
       parseurl: 1.3.3
       safe-buffer: 5.2.1
       uid-safe: 2.1.5
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /express/4.17.1:
@@ -643,6 +656,8 @@ packages:
       type-is: 1.6.18
       utils-merge: 1.0.1
       vary: 1.1.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /extend/3.0.2:
@@ -673,6 +688,8 @@ packages:
       parseurl: 1.3.3
       statuses: 1.5.0
       unpipe: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /find-up/1.1.2:
@@ -798,10 +815,10 @@ packages:
     resolution: {integrity: sha512-nTnJ528pbqxYanhpDYsi4Rd8MAeaBA67+RZ10CM1m3bTAVFEDcd5AuA4a6W5YkGZ1iNXHzZz8T6TBKLeBuNriQ==}
     dev: false
 
-  /handlebars-dateformat/1.1.1:
-    resolution: {integrity: sha1-h0zCJdHOodLyiJexB3ld74kosy8=}
+  /handlebars-dateformat/1.1.3:
+    resolution: {integrity: sha512-D7SjYx66+t2J0IMgq7QbjE2G9hTudICQx8Eg16FHAEm5qu5FRS8T+p1IpmA7WVuz7l6RruJHwWHJpizklzfrcA==}
     dependencies:
-      moment: 2.29.1
+      moment: 2.29.4
     dev: false
 
   /handlebars/4.7.7:
@@ -1185,11 +1202,11 @@ packages:
   /moment-timezone/0.5.33:
     resolution: {integrity: sha512-PTc2vcT8K9J5/9rDEPe5czSIKgLoGsH8UNpA4qZTVw0Vd/Uz19geE9abbIOQKaAQFcnQ3v5YEXrbSc5BpshH+w==}
     dependencies:
-      moment: 2.29.1
+      moment: 2.29.4
     dev: false
 
-  /moment/2.29.1:
-    resolution: {integrity: sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==}
+  /moment/2.29.4:
+    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
     dev: false
 
   /ms/2.0.0:
@@ -1775,6 +1792,8 @@ packages:
       on-finished: 2.3.0
       range-parser: 1.2.1
       statuses: 1.5.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /serve-static/1.14.1:
@@ -1785,6 +1804,8 @@ packages:
       escape-html: 1.0.3
       parseurl: 1.3.3
       send: 0.17.1
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /set-blocking/2.0.0:
@@ -2024,6 +2045,7 @@ packages:
     resolution: {integrity: sha512-JhS3hmcVaXlp/xSo3PKY5R0JqKs5M3IV+exdLHW99qKvKivPO4Z8qbej6mte17SOPqAOVMjt/XGgWacnFSzM3g==}
     engines: {node: '>=0.8.0'}
     hasBin: true
+    requiresBuild: true
     dev: false
     optional: true
 
